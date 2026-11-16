@@ -1,0 +1,369 @@
+{
+ "mes": "2026-10",
+ "lojas": {
+  "AW12": {
+   "valores": {
+    "nfce": 20861017,
+    "nfe102": 14790826,
+    "nfe108": 1339175,
+    "nfe202": 2366773
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW13": {
+   "valores": {
+    "nfce": 70807681,
+    "nfe102": 24175894,
+    "nfe108": 5909729,
+    "nfe202": 6073576
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW18": {
+   "valores": {
+    "nfce": 31667202,
+    "nfe102": 16307095,
+    "nfe108": 2001818,
+    "nfe202": 3334506
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW40": {
+   "valores": {
+    "nfce": 20676760,
+    "nfe102": 8047408,
+    "nfe108": 1740533,
+    "nfe202": 1457911
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW48": {
+   "valores": {
+    "nfce": 35789744,
+    "nfe102": 6715921,
+    "nfe108": 1071195,
+    "nfe202": 2611448
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW57": {
+   "valores": {
+    "nfce": 22429019,
+    "nfe102": 9309284,
+    "nfe108": 1128001,
+    "nfe202": 860464
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW63": {
+   "valores": {
+    "nfce": 19143017,
+    "nfe102": 6032490,
+    "nfe108": 2560304,
+    "nfe202": 834986
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW65": {
+   "valores": {
+    "nfce": 24822732,
+    "nfe102": 7647843,
+    "nfe108": 1852569,
+    "nfe202": 840951
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW89": {
+   "valores": {
+    "nfce": 19509274,
+    "nfe102": 6460556,
+    "nfe108": 5709420,
+    "nfe202": 1073162
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW03": {
+   "valores": {
+    "nfce": 17019602,
+    "nfe102": 6835844,
+    "nfe108": 1667779,
+    "nfe202": 1133978
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW16": {
+   "valores": {
+    "nfce": 15710124,
+    "nfe102": 6267699,
+    "nfe108": 1498532,
+    "nfe202": 1230291
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW25": {
+   "valores": {
+    "nfce": 16511216,
+    "nfe102": 5577865,
+    "nfe108": 516992,
+    "nfe202": 947988
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW36": {
+   "valores": {
+    "nfce": 19556370,
+    "nfe102": 5866711,
+    "nfe108": 885584,
+    "nfe202": 750083
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW53": {
+   "valores": {
+    "nfce": 18687759,
+    "nfe102": 5804053,
+    "nfe108": 856752,
+    "nfe202": 843742
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW69": {
+   "valores": {
+    "nfce": 30976761,
+    "nfe102": 7457482,
+    "nfe108": 7469363,
+    "nfe202": 1835433
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AW64": {
+   "valores": {
+    "nfce": 795485,
+    "nfe102": 0,
+    "nfe108": 0,
+    "nfe202": 89999
+   },
+   "atualizadoEm": "2026-11-13T09:33:31",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF09": {
+   "valores": {
+    "nfce": 31055370,
+    "nfe102": 18785569,
+    "nfe108": 5338332,
+    "nfe202": 3979603
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF49": {
+   "valores": {
+    "nfce": 17240123,
+    "nfe102": 11928036,
+    "nfe108": 1126368,
+    "nfe202": 1529343
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF76": {
+   "valores": {
+    "nfce": 12894469,
+    "nfe102": 11735324,
+    "nfe108": 2771419,
+    "nfe202": 2116693
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF90": {
+   "valores": {
+    "nfce": 53126475,
+    "nfe102": 11877766,
+    "nfe108": 3562760,
+    "nfe202": 3977894
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF106": {
+   "valores": {
+    "nfce": 12509485,
+    "nfe102": 13683767,
+    "nfe108": 18389813,
+    "nfe202": 3259497
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF166": {
+   "valores": {
+    "nfce": 19522125,
+    "nfe102": 8584409,
+    "nfe108": 2969585,
+    "nfe202": 1300152
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF169": {
+   "valores": {
+    "nfce": 3862171,
+    "nfe102": 6411492,
+    "nfe108": 5435274,
+    "nfe202": 390164
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF188": {
+   "valores": {
+    "nfce": 68358309,
+    "nfe102": 7212064,
+    "nfe108": 10515880,
+    "nfe202": 3150245
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF203": {
+   "valores": {
+    "nfce": 37262435,
+    "nfe102": 11716624,
+    "nfe108": 6850490,
+    "nfe202": 2476063
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF204": {
+   "valores": {
+    "nfce": 46146888,
+    "nfe102": 5470945,
+    "nfe108": 6566721,
+    "nfe202": 2558812
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF08": {
+   "valores": {
+    "nfce": 32095454,
+    "nfe102": 10709136,
+    "nfe108": 2817667,
+    "nfe202": 2182249
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF27": {
+   "valores": {
+    "nfce": 15719149,
+    "nfe102": 11404555,
+    "nfe108": 2266656,
+    "nfe202": 2111832
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF43": {
+   "valores": {
+    "nfce": 28029097,
+    "nfe102": 11361912,
+    "nfe108": 2343654,
+    "nfe202": 2447767
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF93": {
+   "valores": {
+    "nfce": 22019013,
+    "nfe102": 7273660,
+    "nfe108": 1898559,
+    "nfe202": 1776965
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF126": {
+   "valores": {
+    "nfce": 11282802,
+    "nfe102": 4975771,
+    "nfe108": 6121698,
+    "nfe202": 1582559
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  },
+  "AF163": {
+   "valores": {
+    "nfce": 15065601,
+    "nfe102": 5998363,
+    "nfe108": 754566,
+    "nfe202": 1362252
+   },
+   "atualizadoEm": "2026-11-13T09:42:28",
+   "atualizadoPor": "Coleta UPDi",
+   "fonte": "UPDi"
+  }
+ },
+ "coletas": {
+  "AWALK": {
+   "em": "2026-11-13T12:33:31.307Z",
+   "lojas": 16,
+   "erros": []
+  },
+  "AFEET": {
+   "em": "2026-11-13T12:42:28.280Z",
+   "lojas": 16,
+   "erros": []
+  }
+ }
+}

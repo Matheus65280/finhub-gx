@@ -1,0 +1,780 @@
+{
+ "versao": 1,
+ "campos": [
+  {
+   "id": "nfce",
+   "nome": "NFC-e",
+   "op": "+"
+  },
+  {
+   "id": "nfe102",
+   "nome": "NFe 102",
+   "op": "+"
+  },
+  {
+   "id": "nfe108",
+   "nome": "NFe 108",
+   "op": "+"
+  },
+  {
+   "id": "nfe202",
+   "nome": "NFe 202 (devoluções)",
+   "op": "-"
+  }
+ ],
+ "lojas": [
+  {
+   "id": "AF09",
+   "marca": "AFEET",
+   "codigo": "09",
+   "nome": "Tatuapé",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 5
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 3898090
+    }
+   ],
+   "vencimento": ""
+  },
+  {
+   "id": "AF49",
+   "marca": "AFEET",
+   "codigo": "49",
+   "nome": "Taboão",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 5
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 2098018
+    }
+   ],
+   "vencimento": ""
+  },
+  {
+   "id": "AF76",
+   "marca": "AFEET",
+   "codigo": "76",
+   "nome": "Boulevard Tatuapé",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 5
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 1387905
+    }
+   ],
+   "vencimento": ""
+  },
+  {
+   "id": "AF90",
+   "marca": "AFEET",
+   "codigo": "90",
+   "nome": "Tamboré",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 5
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 2219619
+    }
+   ],
+   "vencimento": "15"
+  },
+  {
+   "id": "AF106",
+   "marca": "AFEET",
+   "codigo": "106",
+   "nome": "Tucuruvi",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 5
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 884812
+    }
+   ],
+   "vencimento": "15"
+  },
+  {
+   "id": "AF166",
+   "marca": "AFEET",
+   "codigo": "166",
+   "nome": "Del Rey",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 5
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 1155000
+    }
+   ],
+   "vencimento": "15"
+  },
+  {
+   "id": "AF169",
+   "marca": "AFEET",
+   "codigo": "169",
+   "nome": "Minas Shop",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 5
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 1347297
+    }
+   ],
+   "vencimento": "10"
+  },
+  {
+   "id": "AF188",
+   "marca": "AFEET",
+   "codigo": "188",
+   "nome": "Villa Romana",
+   "situacao": "aguardando",
+   "percentuais": [],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "Cálculo diferente das demais lojas. Configurar.",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 3324843
+    }
+   ],
+   "vencimento": "10"
+  },
+  {
+   "id": "AF203",
+   "marca": "AFEET",
+   "codigo": "203",
+   "nome": "Boulevard MG",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 5
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 1920000
+    }
+   ],
+   "vencimento": "15"
+  },
+  {
+   "id": "AF204",
+   "marca": "AFEET",
+   "codigo": "204",
+   "nome": "B.H Shop",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 6
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 4406650
+    }
+   ],
+   "vencimento": ""
+  },
+  {
+   "id": "AW12",
+   "marca": "AWALK",
+   "codigo": "12",
+   "nome": "Tatuapé",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 5
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 2516906
+    }
+   ],
+   "vencimento": ""
+  },
+  {
+   "id": "AW13",
+   "marca": "AWALK",
+   "codigo": "13",
+   "nome": "Anália Franco",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 6
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 6165341
+    }
+   ],
+   "vencimento": "10"
+  },
+  {
+   "id": "AW18",
+   "marca": "AWALK",
+   "codigo": "18",
+   "nome": "Aricanduva",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 4
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 2493643
+    }
+   ],
+   "vencimento": "15"
+  },
+  {
+   "id": "AW40",
+   "marca": "AWALK",
+   "codigo": "40",
+   "nome": "Mauá",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 4
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 1559697
+    }
+   ],
+   "vencimento": ""
+  },
+  {
+   "id": "AW48",
+   "marca": "AWALK",
+   "codigo": "48",
+   "nome": "Taboão",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 5
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 1439275
+    }
+   ],
+   "vencimento": "15"
+  },
+  {
+   "id": "AW57",
+   "marca": "AWALK",
+   "codigo": "57",
+   "nome": "Interlagos",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 4
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 1477528
+    }
+   ],
+   "vencimento": "15"
+  },
+  {
+   "id": "AW63",
+   "marca": "AWALK",
+   "codigo": "63",
+   "nome": "Itaú Power (Contagem)",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 4
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 1359466
+    }
+   ],
+   "vencimento": "10"
+  },
+  {
+   "id": "AW64",
+   "marca": "AWALK",
+   "codigo": "64",
+   "nome": "Shop. Estação",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 5
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 1054804
+    }
+   ],
+   "vencimento": "15"
+  },
+  {
+   "id": "AW65",
+   "marca": "AWALK",
+   "codigo": "65",
+   "nome": "Del Rey",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 5
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 1200000
+    }
+   ],
+   "vencimento": "15"
+  },
+  {
+   "id": "AW89",
+   "marca": "AWALK",
+   "codigo": "89",
+   "nome": "B.H Shop",
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-01",
+     "pct": 6
+    }
+   ],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "",
+   "alugueis": [
+    {
+     "desde": "2026-01",
+     "valor": 3500384
+    }
+   ],
+   "vencimento": "10"
+  },
+  {
+   "id": "AF08",
+   "marca": "AFEET",
+   "codigo": "08",
+   "nome": "Shopping ABC",
+   "grupo": "MACCA",
+   "situacao": "aguardando",
+   "percentuais": [],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "Loja Macca. Percentual ainda não definido.",
+   "alugueis": [],
+   "vencimento": ""
+  },
+  {
+   "id": "AF27",
+   "marca": "AFEET",
+   "codigo": "27",
+   "nome": "Shopping Villa Lobos",
+   "grupo": "MACCA",
+   "situacao": "aguardando",
+   "percentuais": [],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "Loja Macca. Percentual ainda não definido.",
+   "alugueis": [],
+   "vencimento": ""
+  },
+  {
+   "id": "AF43",
+   "marca": "AFEET",
+   "codigo": "43",
+   "nome": "Shopping Plaza Sul",
+   "grupo": "MACCA",
+   "situacao": "aguardando",
+   "percentuais": [],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "Loja Macca. Percentual ainda não definido.",
+   "alugueis": [],
+   "vencimento": ""
+  },
+  {
+   "id": "AF93",
+   "marca": "AFEET",
+   "codigo": "93",
+   "nome": "Shopping SP Market",
+   "grupo": "MACCA",
+   "situacao": "aguardando",
+   "percentuais": [],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "Loja Macca. Percentual ainda não definido.",
+   "alugueis": [],
+   "vencimento": ""
+  },
+  {
+   "id": "AF126",
+   "marca": "AFEET",
+   "codigo": "126",
+   "nome": "São Bernardo Plaza Shopping",
+   "grupo": "MACCA",
+   "situacao": "aguardando",
+   "percentuais": [],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "Loja Macca. Percentual ainda não definido.",
+   "alugueis": [],
+   "vencimento": ""
+  },
+  {
+   "id": "AF163",
+   "marca": "AFEET",
+   "codigo": "163",
+   "nome": "Shopping Campo Limpo II",
+   "grupo": "MACCA",
+   "situacao": "aguardando",
+   "percentuais": [],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "Loja Macca. Percentual ainda não definido.",
+   "alugueis": [],
+   "vencimento": ""
+  },
+  {
+   "id": "AW03",
+   "marca": "AWALK",
+   "codigo": "03",
+   "nome": "Shopping ABC",
+   "grupo": "MACCA",
+   "situacao": "aguardando",
+   "percentuais": [],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "Loja Macca. Percentual ainda não definido.",
+   "alugueis": [],
+   "vencimento": ""
+  },
+  {
+   "id": "AW16",
+   "marca": "AWALK",
+   "codigo": "16",
+   "nome": "Shopping Villa Lobos",
+   "grupo": "MACCA",
+   "situacao": "aguardando",
+   "percentuais": [],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "Loja Macca. Percentual ainda não definido.",
+   "alugueis": [],
+   "vencimento": ""
+  },
+  {
+   "id": "AW25",
+   "marca": "AWALK",
+   "codigo": "25",
+   "nome": "Shopping Plaza Sul",
+   "grupo": "MACCA",
+   "situacao": "aguardando",
+   "percentuais": [],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "Loja Macca. Percentual ainda não definido.",
+   "alugueis": [],
+   "vencimento": ""
+  },
+  {
+   "id": "AW36",
+   "marca": "AWALK",
+   "codigo": "36",
+   "nome": "Shopping Campo Limpo",
+   "grupo": "MACCA",
+   "situacao": "aguardando",
+   "percentuais": [],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "Loja Macca. Percentual ainda não definido.",
+   "alugueis": [],
+   "vencimento": ""
+  },
+  {
+   "id": "AW53",
+   "marca": "AWALK",
+   "codigo": "53",
+   "nome": "São Bernardo Plaza Shopping",
+   "grupo": "MACCA",
+   "situacao": "aguardando",
+   "percentuais": [],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "Loja Macca. Percentual ainda não definido.",
+   "alugueis": [],
+   "vencimento": ""
+  },
+  {
+   "id": "AW69",
+   "marca": "AWALK",
+   "codigo": "69",
+   "nome": "Shopping SP Market",
+   "grupo": "MACCA",
+   "situacao": "aguardando",
+   "percentuais": [],
+   "campos": {
+    "nfce": true,
+    "nfe102": true,
+    "nfe108": true,
+    "nfe202": true
+   },
+   "obs": "Loja Macca. Percentual ainda não definido.",
+   "alugueis": [],
+   "vencimento": ""
+  }
+ ],
+ "atualizadoEm": "2026-11-13T08:43:07",
+ "atualizadoPor": "Claude (aluguel mensal da planilha 07-2026)"
+}

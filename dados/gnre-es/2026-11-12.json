@@ -1,0 +1,36 @@
+{
+ "data": "2026-11-12",
+ "guias": [
+  {
+   "nf": "11748",
+   "cnpj": "10.319.758/0017-08",
+   "loja": "AFEET 106",
+   "emissao": "2026-11-07",
+   "vencimento": "2026-11-09",
+   "referencia": "11/2026",
+   "valor": 152.1,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 11748",
+   "status": "pendente",
+   "municipio": "SERRA",
+   "cMun": "3205002"
+  },
+  {
+   "nf": "19969",
+   "cnpj": "10.319.758/0005-74",
+   "loja": "AWK 13",
+   "emissao": "2026-11-06",
+   "vencimento": "2026-11-09",
+   "referencia": "11/2026",
+   "valor": 62.14,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 19969",
+   "status": "pendente",
+   "municipio": "VILA VELHA",
+   "cMun": "3205200"
+  }
+ ],
+ "planilha": "C:\\Users\\GX\\Desktop\\GNRE Diaria\\2026\\11-2026\\12-11\\planilha_contas_a_pagar_gnre_12-11.xls",
+ "lidoEm": "2026-11-13T10:17:44",
+ "atualizadoEm": "2026-11-13T10:17:44"
+}

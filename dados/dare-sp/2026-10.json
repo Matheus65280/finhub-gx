@@ -1,0 +1,149 @@
+{
+ "mes": "2026-10",
+ "referencia": "10/2026",
+ "vencimento": "2026-11-16",
+ "servico": "ICMS - DIFAL (outra UF) - RPA - Com cadastro em SP (10201)",
+ "conferencia": {
+  "AFEET": {
+   "linhas": 1247,
+   "fcp": "2631.22",
+   "ufdest": "110725.03",
+   "totalRow": "TOTAL | 1355 | 798.064,48 | 38.163,54 | 0,00 | 0,00 | 0,00 | 0,00 | 827.495,45 | 12.259,63 | 798.064,48 | 2.631,22 | 110.725,03"
+  },
+  "AWK": {
+   "linhas": 529,
+   "fcp": "1199.94",
+   "ufdest": "51710.72",
+   "totalRow": "TOTAL | 567 | 362.077,46 | 16.010,30 | 0,00 | 0,00 | 0,00 | 0,00 | 370.011,83 | 5.685,13 | 362.077,46 | 1.199,94 | 51.710,72",
+   "inativas": {
+    "8064": {
+     "linhas": 41,
+     "fcp": "53.90",
+     "ufdest": "3817.09",
+     "totalRow": "TOTAL | 42 | 27.954,12 | 1.262,64 | 0,00 | 0,00 | 0,00 | 0,00 | 28.299,58 | 318,54 | 27.954,12 | 53,90 | 3.817,09"
+    }
+   }
+  }
+ },
+ "guias": [
+  {
+   "marca": "AFEET",
+   "loja": "AFEET 166",
+   "lojaNum": "166",
+   "cnpj": "10.319.758/0020-03",
+   "qtd": 43,
+   "valor": 2590.64,
+   "status": "emitida",
+   "dare": "260590254465800",
+   "pdf": "dados/dare-sp/pdf/2026-10/DARE_260590254465800_AFEET166_2026-10.pdf",
+   "emitidaEm": "2026-11-16T08:59:38",
+   "vencimento": "2026-11-16"
+  },
+  {
+   "marca": "AFEET",
+   "loja": "AFEET 169",
+   "lojaNum": "169",
+   "cnpj": "10.319.758/0025-18",
+   "qtd": 48,
+   "valor": 4157.48,
+   "status": "emitida",
+   "dare": "260590254488665",
+   "pdf": "dados/dare-sp/pdf/2026-10/DARE_260590254488665_AFEET169_2026-10.pdf",
+   "emitidaEm": "2026-11-16T09:07:24",
+   "vencimento": "2026-11-16"
+  },
+  {
+   "marca": "AFEET",
+   "loja": "AFEET 188",
+   "lojaNum": "188",
+   "cnpj": "10.319.758/0022-75",
+   "qtd": 81,
+   "valor": 6419.3,
+   "status": "emitida",
+   "dare": "260590254492466",
+   "pdf": "dados/dare-sp/pdf/2026-10/DARE_260590254492466_AFEET188_2026-10.pdf",
+   "emitidaEm": "2026-11-16T09:09:13",
+   "vencimento": "2026-11-16"
+  },
+  {
+   "marca": "AFEET",
+   "loja": "AFEET 203",
+   "lojaNum": "203",
+   "cnpj": "10.319.758/0023-56",
+   "qtd": 48,
+   "valor": 3467.34,
+   "status": "emitida",
+   "dare": "260590254497486",
+   "pdf": "dados/dare-sp/pdf/2026-10/DARE_260590254497486_AFEET203_2026-10.pdf",
+   "emitidaEm": "2026-11-16T09:10:36",
+   "vencimento": "2026-11-16"
+  },
+  {
+   "marca": "AFEET",
+   "loja": "AFEET 204",
+   "lojaNum": "204",
+   "cnpj": "10.319.758/0024-37",
+   "qtd": 35,
+   "valor": 4099.88,
+   "status": "emitida",
+   "dare": "260590254501362",
+   "pdf": "dados/dare-sp/pdf/2026-10/DARE_260590254501362_AFEET204_2026-10.pdf",
+   "emitidaEm": "2026-11-16T09:11:54",
+   "vencimento": "2026-11-16"
+  },
+  {
+   "marca": "AWK",
+   "loja": "AWK 63",
+   "lojaNum": "63",
+   "cnpj": "10.319.758/0009-06",
+   "qtd": 28,
+   "valor": 2662.32,
+   "status": "emitida",
+   "dare": "260590254505427",
+   "pdf": "dados/dare-sp/pdf/2026-10/DARE_260590254505427_AWK63_2026-10.pdf",
+   "emitidaEm": "2026-11-16T09:12:50",
+   "vencimento": "2026-11-16"
+  },
+  {
+   "marca": "AWK",
+   "loja": "AWK 64",
+   "lojaNum": "64",
+   "cnpj": "43.161.600/0004-97",
+   "qtd": 30,
+   "valor": 2754.92,
+   "status": "emitida",
+   "dare": "260590254569904",
+   "pdf": "dados/dare-sp/pdf/2026-10/DARE_260590254569904_AWK64_2026-10.pdf",
+   "emitidaEm": "2026-11-16T09:36:05",
+   "vencimento": "2026-11-16"
+  },
+  {
+   "marca": "AWK",
+   "loja": "AWK 65",
+   "lojaNum": "65",
+   "cnpj": "10.319.758/0016-27",
+   "qtd": 22,
+   "valor": 1542.25,
+   "status": "emitida",
+   "dare": "260590254508076",
+   "pdf": "dados/dare-sp/pdf/2026-10/DARE_260590254508076_AWK65_2026-10.pdf",
+   "emitidaEm": "2026-11-16T09:14:06",
+   "vencimento": "2026-11-16"
+  },
+  {
+   "marca": "AWK",
+   "loja": "AWK 89",
+   "lojaNum": "89",
+   "cnpj": "10.319.758/0026-07",
+   "qtd": 42,
+   "valor": 3668.59,
+   "status": "emitida",
+   "dare": "260590254511347",
+   "pdf": "dados/dare-sp/pdf/2026-10/DARE_260590254511347_AWK89_2026-10.pdf",
+   "emitidaEm": "2026-11-16T09:15:24",
+   "vencimento": "2026-11-16"
+  }
+ ],
+ "lidoEm": "2026-11-16T09:31:51",
+ "atualizadoEm": "2026-11-16T09:36:05"
+}

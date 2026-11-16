@@ -1,0 +1,20 @@
+[
+ {
+  "data": "2026-11-12",
+  "guias": 2,
+  "emitidas": 0,
+  "semPlanilha": false
+ },
+ {
+  "data": "2026-11-13",
+  "guias": 0,
+  "emitidas": 0,
+  "semPlanilha": false
+ },
+ {
+  "data": "2026-11-16",
+  "guias": 10,
+  "emitidas": 10,
+  "semPlanilha": false
+ }
+]
