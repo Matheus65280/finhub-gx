@@ -28,9 +28,12 @@
    "valor": 68.9,
    "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
    "infoAdicional": "NF 10798",
-   "status": "pendente",
+   "status": "emitida",
    "municipio": "GUARAPARI",
-   "cMun": "3202405"
+   "cMun": "3202405",
+   "dua": "4036569223",
+   "pdf": "dados/gnre-es/pdf/2026-11-17/DUA_4036569223_AWK69_NF10798.pdf",
+   "emitidaEm": "2026-11-17T09:37:18"
   },
   {
    "nf": "961",
@@ -42,12 +45,15 @@
    "valor": 152.1,
    "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
    "infoAdicional": "NF 961",
-   "status": "pendente",
+   "status": "emitida",
    "municipio": "SERRA",
-   "cMun": "3205002"
+   "cMun": "3205002",
+   "dua": "4036569416",
+   "pdf": "dados/gnre-es/pdf/2026-11-17/DUA_4036569416_AWK89_NF961.pdf",
+   "emitidaEm": "2026-11-17T09:42:31"
   }
  ],
  "planilha": "C:\\Users\\GX\\Desktop\\GNRE Diaria\\2026\\11-2026\\17-11\\planilha_contas_a_pagar_gnre_17-11.xls",
- "lidoEm": "2026-11-17T09:34:35",
- "atualizadoEm": "2026-11-17T09:34:35"
+ "lidoEm": "2026-11-17T09:42:32",
+ "atualizadoEm": "2026-11-17T09:42:32"
 }
