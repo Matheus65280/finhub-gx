@@ -1,0 +1,44 @@
+{
+ "data": "2026-11-17",
+ "guias": [
+  {
+   "nf": "14141",
+   "cnpj": "10.319.758/0006-55",
+   "loja": "AWK 18",
+   "emissao": "2026-11-16",
+   "vencimento": "2026-11-17",
+   "referencia": "11/2026",
+   "valor": 35.1,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 14141",
+   "status": "pendente"
+  },
+  {
+   "nf": "10798",
+   "cnpj": "23.473.808/0013-25",
+   "loja": "AWK 69",
+   "emissao": "2026-11-16",
+   "vencimento": "2026-11-17",
+   "referencia": "11/2026",
+   "valor": 68.9,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 10798",
+   "status": "pendente"
+  },
+  {
+   "nf": "961",
+   "cnpj": "10.319.758/0026-07",
+   "loja": "AWK 89",
+   "emissao": "2026-11-16",
+   "vencimento": "2026-11-17",
+   "referencia": "11/2026",
+   "valor": 152.1,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 961",
+   "status": "pendente"
+  }
+ ],
+ "planilha": "C:\\Users\\GX\\Desktop\\GNRE Diaria\\2026\\11-2026\\17-11\\planilha_contas_a_pagar_gnre_17-11.xls",
+ "lidoEm": "2026-11-17T09:26:51",
+ "atualizadoEm": "2026-11-17T09:26:51"
+}
