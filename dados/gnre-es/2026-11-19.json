@@ -1,0 +1,20 @@
+{
+ "data": "2026-11-19",
+ "guias": [
+  {
+   "nf": "983",
+   "cnpj": "10.319.758/0026-07",
+   "loja": "AWK 89",
+   "emissao": "2026-11-18",
+   "vencimento": "2026-11-19",
+   "referencia": "11/2026",
+   "valor": 27.3,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 983",
+   "status": "pendente"
+  }
+ ],
+ "planilha": "C:\\Users\\GX\\Desktop\\GNRE Diaria\\2026\\11-2026\\19-11\\planilha_contas_a_pagar_gnre_19-11.xls",
+ "lidoEm": "2026-11-19T08:15:27",
+ "atualizadoEm": "2026-11-19T08:15:27"
+}

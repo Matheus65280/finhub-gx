@@ -22,5 +22,17 @@
   "guias": 3,
   "emitidas": 3,
   "semPlanilha": false
+ },
+ {
+  "data": "2026-11-18",
+  "guias": 0,
+  "emitidas": 0,
+  "semPlanilha": false
+ },
+ {
+  "data": "2026-11-19",
+  "guias": 1,
+  "emitidas": 0,
+  "semPlanilha": false
  }
 ]
