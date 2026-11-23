@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-23T13:56:43-03:00";</script>
+<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-23T14:06:56-03:00";</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FinHub GX</title>
@@ -446,6 +446,25 @@ dialog.cfg .dh button{color:var(--gx-muted)}
 :root[data-theme="dark"] .tile .alerta{background:rgba(220,38,38,.2);color:#F87171;border-color:rgba(248,113,113,.45)}
 :root[data-theme="dark"] .tile .alerta.ok{background:rgba(21,128,61,.2);color:#4ADE80;border-color:rgba(74,222,128,.45)}
 
+/* ---------- Indicador da VPN (canto inferior direito; só informativo) ---------- */
+.vpn-ind{position:fixed;right:16px;bottom:16px;z-index:900;display:none;align-items:center;gap:8px;padding:8px 14px;
+  background:var(--gx-surface);color:var(--gx-text);border:1px solid var(--gx-border);border-radius:var(--gx-radius-sm);
+  box-shadow:0 4px 14px rgba(16,24,40,.12);font-size:13px;font-weight:700;letter-spacing:.02em;pointer-events:none;user-select:none}
+.vpn-ind.on,.vpn-ind.off{display:inline-flex}
+.vpn-ind .bola{width:10px;height:10px;border-radius:50%;flex:none;animation:vpnPisca 1.6s ease-in-out infinite}
+.vpn-ind.on .bola{background:var(--gx-success);box-shadow:0 0 0 0 rgba(21,128,61,.5)}
+.vpn-ind.off .bola{background:var(--gx-danger);box-shadow:0 0 0 0 rgba(220,38,38,.5)}
+.vpn-ind.on{border-color:#ABEFC6}
+.vpn-ind.off{border-color:#FECDCA;color:var(--gx-danger)}
+@keyframes vpnPisca{0%,100%{opacity:1}50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.vpn-ind .bola{animation:none}}
+@media (max-width:767px){.vpn-ind{right:12px;bottom:12px;padding:6px 10px;font-size:12px}}
+:root[data-theme="dark"] .vpn-ind{background:#17191F;box-shadow:0 4px 14px rgba(0,0,0,.5)}
+:root[data-theme="dark"] .vpn-ind.on{border-color:rgba(74,222,128,.45)}
+:root[data-theme="dark"] .vpn-ind.off{border-color:rgba(248,113,113,.45);color:#F87171}
+/* não cobrir o fim da página */
+body{padding-bottom:56px}
+
 /* ---------- Botão de tema (abre sempre no diurno) ---------- */
 .tema{display:inline-flex;align-items:center;gap:6px}
 .tema svg{width:16px;height:16px;flex:none}
@@ -504,6 +523,7 @@ html.intro .marca{visibility:hidden}
   <button class="btn tema" id="tema" type="button"></button>
 </div></header>
 <div id="intro" aria-hidden="true"></div>
+<div class="vpn-ind" id="vpnInd" role="status" aria-live="polite"><span class="bola" aria-hidden="true"></span><span id="vpnTxt"></span></div>
 
 <main><div class="wrap">
   <section class="screen active" id="screenUser">
@@ -1741,6 +1761,30 @@ async function auBadge(){
     t.insertAdjacentHTML('beforeend', d.ok ? '<span class="alerta ok">✓ Tudo certo</span>' : `<span class="alerta">! ${d.atencao} com problema</span>`);
   } catch(e) {}
 }
+
+/* ================= INDICADOR DA VPN =================
+   Canto inferior direito, só informativo: VPN ON (verde) quando o banco do portal (172.16.16.18) responde
+   pela VPN; VPN OFFLINE (vermelho) quando não. Pergunta ao receptor (GET /vpn) a cada 30 s.
+   Na versão online não aparece (lá não há como testar a VPN do escritório). */
+(function vpnIndicador(){
+  if (ONLINE) return;
+  const box = $('vpnInd'), txt = $('vpnTxt');
+  const pintar = ok => {
+    box.className = 'vpn-ind ' + (ok ? 'on' : 'off');
+    txt.textContent = ok ? 'VPN ON' : 'VPN OFFLINE';
+    box.title = ok ? 'Conectado à VPN: o banco do portal GX está acessível.' : 'Sem VPN: o banco do portal GX não responde (o Docas não atualiza).';
+  };
+  const checar = async () => {
+    try {
+      const r = await fetch(`${RECEPTOR}/vpn?_=${Date.now()}`, { cache:'no-store' });
+      if (!r.ok) throw new Error();
+      pintar((await r.json()).ok);
+    } catch(e) { pintar(false); }
+  };
+  checar();
+  setInterval(checar, 30e3);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) checar(); });
+})();
 
 function enter(u){
   $('who').innerHTML = `<span>Olá, <b>${u}</b></span><button class="btn" id="sair" type="button">Trocar usuário</button>`;
