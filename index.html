@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-23T12:46:09-03:00";</script>
+<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-23T12:56:22-03:00";</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FinHub GX</title>
@@ -343,6 +343,9 @@ h2.sec{font-size:20px;font-weight:700;margin:32px 0 12px}
 .kpi .v{font-size:clamp(15px,10.5cqi,28px);font-weight:700;line-height:1.15;margin-top:6px;color:var(--gx-text);white-space:nowrap;overflow-wrap:normal;word-break:normal;font-variant-numeric:tabular-nums}
 .store .vl,.cf-parc em,.tabfat td,.tabfat th{white-space:nowrap;overflow-wrap:normal;word-break:normal}
 .store .vl{font-size:clamp(14px,10cqi,20px)!important}
+/* Textos de situação (não são números) quebram linha dentro do card, nunca saem dele */
+.store .vl.txt{white-space:normal!important;font-size:15px!important;line-height:1.3;overflow-wrap:break-word}
+.store,.kpi,.au-card,.tile{overflow:hidden}
 .kpi .s{font-size:12.5px;color:var(--gx-muted)}
 .store .vl{font-size:20px;font-weight:700}
 .store b{font-size:16px;font-weight:700}
@@ -1168,9 +1171,9 @@ function renderAluguel(){
     return `<div class="redetit"><span class="rede ${m}">${AL_SIGLA[m]||m}</span>${AL_MARCAS[m]||m} <span>${g.length} loja(s)</span></div>
     <div class="stores">${g.map(l=>{
       const off = alOff(l), c = off ? null : alCalc(l,mes), pv = alPct(l,mes);
-      const vl = off ? `<span class="vl neg" style="font-size:16px">${AL_SIT[l.situacao]||l.situacao}</span>`
+      const vl = off ? `<span class="vl neg txt">${AL_SIT[l.situacao]||l.situacao}</span>`
         : c.completo ? `<span class="vl ${c.pagar<=0?'neg':''}">${brl(Math.max(0,c.pagar))}</span>`
-        : `<span class="vl neg" style="font-size:16px">${c.algum?'Dados incompletos':'Sem dados do mês'}</span>`;
+        : `<span class="vl neg txt">${c.algum?'Dados incompletos':'Sem dados do mês'}</span>`;
       const det = off ? esc(l.obs||'') : c.completo ? (c.pagar<=0 ? 'Percentual não supera o aluguel do mês' : `Líquido ${brl(c.liquido)} · aluguel ${brl(c.aluguel)}`) : 'Clique para lançar os valores';
       return `<button class="store ${off?'off':''}" type="button" data-loja="${l.id}" title="${off?'Aguardando configuração · ':''}Abrir ${esc(l.id)}">
         <b>${esc(l.id)}<span class="ir">›</span></b>
