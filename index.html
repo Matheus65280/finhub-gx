@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-23T13:00:21-03:00";</script>
+<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-23T13:07:08-03:00";</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FinHub GX</title>
@@ -1672,7 +1672,7 @@ const AU_ST = {
 const AU_GRUPOS = ['FinHub GX','Docas GX','Automações do chat (Cowork)','Outras automações'];
 const auAtencao = s => ['travou','erro','bloqueada','nao-rodou'].includes(s);
 const auQuando = s => s ? new Date(s).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).replace(',', ' às') : '–';
-const auFreq = i => i.freq==='diaria' ? `Todo dia às ${i.hora}` : i.freq==='seg-sex' ? `Seg a sex às ${i.hora}` : i.freq==='mensal' ? `Todo dia ${i.dia} às ${i.hora}` : (i.freq||'');
+const auFreq = i => i.freq==='horaria' ? `De hora em hora (min. ${(i.hora||'').slice(3)})` : i.freq==='diaria' ? `Todo dia às ${i.hora}` : i.freq==='seg-sex' ? `Seg a sex às ${i.hora}` : i.freq==='mensal' ? `Todo dia ${i.dia} às ${i.hora}` : (i.freq||'');
 const auChip = s => { const c = AU_ST[s] || AU_ST.aguardando; return `<span class="st ${c[0]}">${c[1]} ${c[2]}</span>`; };
 
 async function auBuscar(){
