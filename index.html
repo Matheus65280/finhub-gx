@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-23T09:21:50-03:00";</script>
+<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-23T09:27:00-03:00";</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FinHub GX</title>
@@ -403,7 +403,53 @@ dialog.cfg .dh button{color:var(--gx-muted)}
 .rodape span{display:block;margin-top:4px}
 /* Foco visível (§11) */
 :focus-visible{outline:2px solid var(--gx-primary);outline-offset:2px}
+
+/* ---------- Botão de tema (abre sempre no diurno) ---------- */
+.tema{display:inline-flex;align-items:center;gap:6px}
+.tema svg{width:16px;height:16px;flex:none}
+#who:empty+.tema{margin-left:auto}
+@media (max-width:640px){.tema span{display:none}}
+
+/* ---------- Modo noturno = Premier Dark do manual (§03/§12) ---------- */
+:root[data-theme="dark"]{
+  --gx-bg:#0D0F14;--gx-surface:#24262D;--gx-text:#FFFFFF;--gx-muted:#B7BDC9;--gx-border:#3A3E48;
+  --gx-primary-soft:rgba(255,100,28,.16);--gx-primary-text:#FF8A4C;
+  --gx-shadow:0 1px 2px rgba(0,0,0,.4);--gx-shadow-hover:0 4px 14px rgba(0,0,0,.5);
+  --surface2:#17191F;--on-black:#FFFFFF;color-scheme:dark;
+}
+:root[data-theme="dark"] header.top,:root[data-theme="dark"] .rodape{background:#17191F}
+:root[data-theme="dark"] .btn:hover{background:#2E3038;border-color:#4A4F5B}
+:root[data-theme="dark"] .btn.pri,:root[data-theme="dark"] .btn.pri2,:root[data-theme="dark"] .btn.imp,:root[data-theme="dark"] .seg button[aria-pressed="true"]{color:#151820}
+:root[data-theme="dark"] .tile.locked,:root[data-theme="dark"] .tabfat thead th,:root[data-theme="dark"] table.es thead th,:root[data-theme="dark"] table.det thead th{background:#17191F}
+:root[data-theme="dark"] .tile.locked .ic{background:#2E3038}
+:root[data-theme="dark"] .tabfat tr.sub td{background:rgba(255,100,28,.08)}
+:root[data-theme="dark"] .tabfat tr.geral td,:root[data-theme="dark"] .tabfat tr.geral td.loja,:root[data-theme="dark"] .tabfat tr.geral td.tot,:root[data-theme="dark"] table.det tfoot td,:root[data-theme="dark"] table.es tfoot td,:root[data-theme="dark"] table.calc tr.res td{background:#17191F}
+:root[data-theme="dark"] .gcol.ativo .gbar{background:#FFFFFF}
+:root[data-theme="dark"] #gtip{background:#0D0F14;border-color:#3A3E48}
+:root[data-theme="dark"] .st.emitida,:root[data-theme="dark"] .cf-card.ok{background:rgba(21,128,61,.18);color:#4ADE80;border-color:rgba(74,222,128,.45)}
+:root[data-theme="dark"] .st.erro,:root[data-theme="dark"] .cf-card.nao{background:rgba(220,38,38,.18);color:#F87171;border-color:rgba(248,113,113,.45)}
+:root[data-theme="dark"] .st.aviso,:root[data-theme="dark"] .cf-card.sem{background:rgba(180,83,9,.22);color:#FBBF24;border-color:rgba(251,191,36,.45)}
+:root[data-theme="dark"] .cf-card.ok .cf-st{color:#4ADE80}:root[data-theme="dark"] .cf-card.nao .cf-st{color:#F87171}:root[data-theme="dark"] .cf-card.sem .cf-st{color:#FBBF24}
+:root[data-theme="dark"] .kpi .v.up{color:#4ADE80}:root[data-theme="dark"] .kpi .v.down{color:#F87171}
+
+/* ---------- Animação de abertura (discreta, com o logotipo oficial) ---------- */
+#intro{display:none}
+html.intro #intro{display:block;position:fixed;inset:0 0 auto 0;height:100vh;height:100dvh;background:var(--gx-surface);border-bottom:2px solid var(--gx-primary);z-index:1000;cursor:pointer}
+:root[data-theme="dark"].intro #intro{background:#17191F}
+html.intro .marca{visibility:hidden}
+#intro.fly{transition:height .7s cubic-bezier(.7,0,.2,1)}
+.logo-clone{position:fixed;margin:0;z-index:1001;transform-origin:0 0;pointer-events:none}
+.logo-clone.fly{transition:transform .7s cubic-bezier(.7,0,.2,1)}
+.marca.play .logo-of{animation:dsLogo .6s ease-out both}
+.marca.play .div-v{animation:dsDiv .45s ease-out .45s both;transform-origin:center}
+.marca.play .sist b{animation:dsTxt .5s ease-out .7s both}
+.marca.play .sist small{animation:dsTxt .5s ease-out .85s both}
+@keyframes dsLogo{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+@keyframes dsDiv{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes dsTxt{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.marca.play *{animation:none!important}}
 </style>
+<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro')}catch(e){}</script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -413,7 +459,9 @@ dialog.cfg .dh button{color:var(--gx-muted)}
     <span class="sist"><b>FinHub</b><small>Portal do Financeiro</small></span>
   </a>
   <div class="who" id="who"></div>
+  <button class="btn tema" id="tema" type="button"></button>
 </div></header>
+<div id="intro" aria-hidden="true"></div>
 
 <main><div class="wrap">
   <section class="screen active" id="screenUser">
@@ -1468,8 +1516,13 @@ function cfDvOk(k){ // dígito verificador (módulo 11)
   let s=0, p=2; for (let i=42;i>=0;i--){ s += (+k[i])*p; p = p===9 ? 2 : p+1; }
   const r = s % 11, dv = r<2 ? 0 : 11-r; return dv === +k[43];
 }
-async function cfCarregar(forcar){
-  if (CF.idx && !forcar && Date.now()-CF.carregadoEm < 10*60e3) return;
+function cfCarregar(forcar){
+  if (CF.idx && !forcar && Date.now()-CF.carregadoEm < 10*60e3) return Promise.resolve();
+  if (CF.carregando) return CF.carregando;
+  CF.carregando = cfCarregarAgora().finally(() => { CF.carregando = null; });
+  return CF.carregando;
+}
+async function cfCarregarAgora(){
   try {
     const d = await alGetJSON('dados/f360/copia.json');
     if (!d) { CF.base = null; CF.idx = new Map(); return; }
@@ -1494,6 +1547,12 @@ function cfConferir(bruto){
   const k = String(bruto||'').replace(/\D/g,'');
   const inp = $('cfChave'); inp.value = ''; inp.focus();
   if (!k) return;
+  // Leitura feita antes de a cópia do F360 terminar de carregar: espera e confere em seguida
+  if (!CF.base && CF.carregando) {
+    $('cfRes').innerHTML = '<div class="cf-card inv"><div class="cf-st">Carregando a cópia do F360…</div><div class="cf-chave">A conferência sai em instantes.</div></div>';
+    CF.carregando.then(() => { cfInfoBase(); cfConferir(k); });
+    return;
+  }
   if (k.length !== 44 || !cfDvOk(k)) {
     $('cfRes').innerHTML = `<div class="cf-card inv"><div class="cf-st">Leitura inválida</div><div class="cf-chave">Li ${k.length} dígito(s): ${esc(k)}. A chave de acesso tem 44 dígitos. Bipe de novo o código de barras do DANFE.</div></div>`;
     return;
@@ -1560,8 +1619,51 @@ renderUsers();
 irInicio();
 </script>
 <script>
-/* Logo: volta ao início */
-document.getElementById('logo').addEventListener('click', e => { e.preventDefault(); if (typeof irInicio === 'function') irInicio(); });
+/* Modo diurno (Corporate Light) / noturno (Premier Dark). O portal SEMPRE abre no diurno;
+   o noturno vale só enquanto a página estiver aberta. */
+(function(){
+  const SOL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  const LUA='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+  const b=document.getElementById('tema'), root=document.documentElement;
+  const pintar=()=>{ const esc=root.getAttribute('data-theme')==='dark'; b.innerHTML=(esc?SOL:LUA)+`<span>${esc?'Modo diurno':'Modo noturno'}</span>`; b.title=esc?'Mudar para o modo diurno':'Mudar para o modo noturno'; b.setAttribute('aria-label',b.title); };
+  b.onclick=()=>{ const esc=root.getAttribute('data-theme')==='dark'; if(esc) root.removeAttribute('data-theme'); else root.setAttribute('data-theme','dark'); pintar(); };
+  pintar();
+})();
+
+/* Animação de abertura: logotipo oficial no centro, depois vai para o cabeçalho. Clique no logo = início. */
+(function(){
+const root=document.documentElement,l=document.getElementById('logo'),ov=document.getElementById('intro');
+if(!l)return;
+const play=el=>{el.classList.remove('play');void el.offsetWidth;el.classList.add('play')};
+l.addEventListener('click',e=>{e.preventDefault();play(l);if(typeof irInicio==='function')irInicio()});
+if(!root.classList.contains('intro')||!ov)return;
+let clone,flying=false,done=false,tFly;
+const finish=()=>{if(done)return;done=true;root.classList.remove('intro');clone&&clone.remove()};
+const fly=()=>{
+  if(flying||!clone)return;flying=true;clearTimeout(tFly);
+  const r=l.getBoundingClientRect(),hd=l.closest('header');
+  clone.style.left=r.left+'px';clone.style.top=r.top+'px';
+  clone.classList.add('fly');ov.classList.add('fly');
+  requestAnimationFrame(()=>{clone.style.transform='none';ov.style.height=(hd?hd.getBoundingClientRect().bottom:84)+'px'});
+  clone.addEventListener('transitionend',finish,{once:true});setTimeout(finish,1000);
+};
+const start=()=>{
+  if(done)return;
+  const r=l.getBoundingClientRect(),vw=innerWidth,vh=innerHeight;
+  const s=Math.max(1.1,Math.min(2.2,(vw*.7)/r.width));
+  clone=l.cloneNode(true);clone.removeAttribute('id');clone.classList.add('logo-clone');
+  clone.style.left=r.left+'px';clone.style.top=r.top+'px';clone.style.width=r.width+'px';clone.style.visibility='visible';
+  clone.style.transform='translate('+(vw/2-r.width*s/2-r.left)+'px,'+(vh/2-r.height*s/2-r.top)+'px) scale('+s+')';
+  document.body.appendChild(clone);
+  play(clone);
+  tFly=setTimeout(fly,1700);
+};
+ov.addEventListener('click',fly);addEventListener('keydown',fly,{once:true});
+const img=l.querySelector('img');
+const pronto=Promise.all([document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve(), img&&!img.complete?new Promise(r=>{img.onload=img.onerror=r}):Promise.resolve()]);
+Promise.race([pronto,new Promise(r=>setTimeout(r,800))]).then(()=>requestAnimationFrame(start));
+setTimeout(()=>{if(!clone)finish()},3500);
+})();
 </script>
 </body>
 </html>
