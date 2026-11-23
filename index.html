@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-23T10:56:13-03:00";</script>
+<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-23T11:03:46-03:00";</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FinHub GX</title>
@@ -408,6 +408,41 @@ dialog.cfg .dh button{color:var(--gx-muted)}
 /* Foco visível (§11) */
 :focus-visible{outline:2px solid var(--gx-primary);outline-offset:2px}
 
+/* ---------- Automações (Design System: cards, estados com ícone + texto) ---------- */
+.au-resumo{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-radius:var(--gx-radius-md);border:1px solid var(--gx-border);background:var(--gx-surface);box-shadow:var(--gx-shadow);padding:16px 20px;margin-bottom:8px}
+.au-resumo .ico{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:22px;flex:none}
+.au-resumo.ok{border-left:4px solid var(--gx-success)}.au-resumo.ok .ico{background:#ECFDF3;color:var(--gx-success)}
+.au-resumo.mal{border-left:4px solid var(--gx-danger)}.au-resumo.mal .ico{background:#FEF3F2;color:var(--gx-danger)}
+.au-resumo b{display:block;font-size:20px;font-weight:700}
+.au-resumo span{color:var(--gx-muted);font-size:13px}
+.au-resumo .btn{margin-left:auto}
+.au-grupo{font-size:13px;font-weight:600;color:var(--gx-muted);margin:24px 0 10px;text-transform:none}
+.au-lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+@media (max-width:767px){.au-lista{grid-template-columns:minmax(0,1fr)}}
+.au-card{background:var(--gx-surface);border:1px solid var(--gx-border);border-radius:var(--gx-radius-md);box-shadow:var(--gx-shadow);padding:16px 18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.au-card.atencao{border-left:4px solid var(--gx-danger)}
+.au-card.aviso{border-left:4px solid #F79009}
+.au-card.bom{border-left:4px solid var(--gx-success)}
+.au-topo{display:flex;align-items:flex-start;gap:10px}
+.au-topo h3{margin:0;font-size:16px;font-weight:600;flex:1;line-height:1.3}
+.au-quando{font-size:12.5px;color:var(--gx-muted)}
+.au-det{font-size:13.5px;line-height:1.45;overflow-wrap:anywhere}
+.au-acoes{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.au-acoes .btn{min-height:36px;padding:6px 12px;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.st.neutro{background:#F2F4F7;color:var(--gx-muted);border-color:var(--gx-border)}
+.au-hist{margin-top:2px}
+.au-hist summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--gx-primary-text)}
+.au-hist ol{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.au-hist li{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;font-size:12.5px;border-top:1px solid var(--gx-border);padding-top:6px}
+.au-hist li a{color:var(--gx-primary-text);font-weight:600;white-space:nowrap}
+.au-hist li span.t{color:var(--gx-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tile .alerta{position:absolute;top:12px;right:12px;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:#FEF3F2;color:var(--gx-danger);border:1px solid #FECDCA}
+.tile .alerta.ok{background:#ECFDF3;color:var(--gx-success);border-color:#ABEFC6}
+:root[data-theme="dark"] .au-resumo.ok .ico{background:rgba(21,128,61,.2)}:root[data-theme="dark"] .au-resumo.mal .ico{background:rgba(220,38,38,.2)}
+:root[data-theme="dark"] .st.neutro{background:#2E3038}
+:root[data-theme="dark"] .tile .alerta{background:rgba(220,38,38,.2);color:#F87171;border-color:rgba(248,113,113,.45)}
+:root[data-theme="dark"] .tile .alerta.ok{background:rgba(21,128,61,.2);color:#4ADE80;border-color:rgba(74,222,128,.45)}
+
 /* ---------- Botão de tema (abre sempre no diurno) ---------- */
 .tema{display:inline-flex;align-items:center;gap:6px}
 .tema svg{width:16px;height:16px;flex:none}
@@ -601,6 +636,14 @@ html.intro .marca{visibility:hidden}
     </div>
     <div id="nCorpo"></div>
   </section>
+  <section class="screen" id="screenAutom">
+    <button class="voltar" type="button" onclick="auSair()">‹ Voltar aos módulos</button>
+    <h1>Automações</h1>
+    <p class="sub">Situação das tarefas automáticas do Claude e das rotinas do FinHub. Atualiza sozinha a cada minuto.</p>
+    <div id="auResumo"></div>
+    <div id="auLista"></div>
+  </section>
+
   <section class="screen" id="screenConfF360">
     <button class="voltar" type="button" onclick="cfSair()">‹ Voltar aos módulos</button>
     <h1>Conferir nota no F360</h1>
@@ -642,6 +685,7 @@ if (ONLINE) {
     const met = String(opt.method || (input && input.method) || 'GET').toUpperCase();
     if (/:8766(\/|$)/.test(url)) {
       if (met === 'GET' && /:8766\/notas(\?|$)/.test(url)) return _fetch(`dados/notas-fora-sp/lista.json?_=${Date.now()}`, { cache:'no-store' });
+      if (met === 'GET' && /:8766\/automacoes(\?|$)/.test(url)) return _fetch(`dados/automacoes/status.json?_=${Date.now()}`, { cache:'no-store' });
       return Promise.reject(new Error(MSG_ONLINE));
     }
     if (met !== 'GET' || /\.pdf(\?|$)/i.test(url)) return Promise.reject(new Error(MSG_ONLINE));
@@ -674,6 +718,7 @@ const MODULES = [
   { id:"aluguel-complementar", title:"Aluguel complementar",  locked:false, icon:"building", abrir:()=>abrirAluguel() },
   { id:"encontro-contas-4849", title:"Encontro de contas 48/49", locked:true, icon:"swap" },
   { id:"faturamento",          title:"Faturamento",           locked:false, icon:"chart", abrir:()=>abrirFaturamento() },
+  { id:"automacoes",           title:"Automações",            locked:false, icon:"pulse", abrir:()=>abrirAutomacoes() },
   { id:"conferir-f360",        title:"Conferir nota no F360", locked:false, icon:"scan", abrir:()=>abrirConfF360() },
   { id:"prorrogacao-f360",     title:"Prorrogação de notas F360", locked:false, soLocal:true, icon:"calendar", abrir:()=>abrirProrrogacao() },
   { id:"abatimento-massa",     title:"Abatimento em massa",   locked:true, icon:"percent" },
@@ -688,6 +733,7 @@ const ICONS = {
   percent:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5L5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>',
   print:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>',
   lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>',
+  pulse:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg>',
   scan:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 8v8M10 8v8M13 8v8M16 8v8"/></svg>',
 };
 
@@ -714,6 +760,7 @@ function renderModules(){
       <span class="tgo">${m.locked?'(Em desenvolvimento)':loc?'(Só no computador do escritório)':'Abrir ›'}</span>
     </button>`; }).join('');
   $('modules').querySelectorAll('.tile:not(.locked)').forEach(b=>b.onclick=()=>{ const m=MODULES.find(x=>x.id===b.dataset.id); m.abrir&&m.abrir(); });
+  auBadge();
 }
 
 /* ================= FATURAMENTO ================= */
@@ -1609,6 +1656,83 @@ function cfHist(){
   // mantém o foco no campo enquanto a tela está aberta (o leitor "digita" onde o cursor estiver)
   document.addEventListener('click', e => { if ($('screenConfF360').classList.contains('active') && !e.target.closest('button,a,input,select,textarea')) inp.focus(); });
 })();
+
+/* ================= AUTOMAÇÕES =================
+   Lê GET /automacoes do receptor (servidor/automacoes.py), que consulta os registros das execuções
+   das tarefas agendadas do Claude neste computador, as rotinas do Windows e o sinal do Cowork. */
+const AU = { dados:null, timer:null };
+const AU_ST = {
+  ok:['emitida','✓','Rodou certo'], travou:['erro','✕','Travou'], erro:['erro','✕','Erro'],
+  bloqueada:['aviso','!','Pediu decisão'], 'nao-rodou':['aviso','!','Não rodou'],
+  rodando:['neutro','↻','Rodando'], aguardando:['neutro','…','Aguardando'],
+};
+const auAtencao = s => ['travou','erro','bloqueada','nao-rodou'].includes(s);
+const auQuando = s => s ? new Date(s).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).replace(',', ' às') : '–';
+const auFreq = i => i.freq==='diaria' ? `Todo dia às ${i.hora}` : i.freq==='seg-sex' ? `Seg a sex às ${i.hora}` : i.freq==='mensal' ? `Todo dia ${i.dia} às ${i.hora}` : (i.freq||'');
+const auChip = s => { const c = AU_ST[s] || AU_ST.aguardando; return `<span class="st ${c[0]}">${c[1]} ${c[2]}</span>`; };
+
+async function auBuscar(){
+  const r = await fetch(`${RECEPTOR}/automacoes?_=${Date.now()}`, { cache:'no-store' });
+  if (!r.ok) throw new Error(await r.text() || `erro ${r.status}`);
+  return r.json();
+}
+async function abrirAutomacoes(){
+  show('screenAutom'); window.scrollTo(0,0);
+  if (!AU.dados) $('auLista').innerHTML = '<div class="vazio">Carregando…</div>';
+  await auAtualizar();
+  clearInterval(AU.timer);
+  AU.timer = setInterval(() => { if ($('screenAutom').classList.contains('active')) auAtualizar(); else clearInterval(AU.timer); }, 60e3);
+}
+function auSair(){ clearInterval(AU.timer); irInicio(); }
+async function auAtualizar(){
+  try { AU.dados = await auBuscar(); renderAutomacoes(); }
+  catch(e) {
+    $('auResumo').innerHTML = '';
+    $('auLista').innerHTML = `<div class="vazio">${ONLINE ? 'Situação das automações indisponível no momento.' : 'Não consegui falar com o receptor local (porta 8766). Abra o portal pelo <b>abrir-finhub.bat</b> e tente de novo.'}</div>`;
+  }
+}
+function renderAutomacoes(){
+  const d = AU.dados, at = d.itens.filter(i => auAtencao(i.situacao));
+  $('auResumo').innerHTML = `<div class="au-resumo ${d.ok?'ok':'mal'}" role="status">
+      <span class="ico" aria-hidden="true">${d.ok?'✓':'!'}</span>
+      <div><b>${d.ok ? 'Tudo certo' : `${at.length} automaç${at.length>1?'ões precisam':'ão precisa'} de atenção`}</b>
+      <span>${d.total} automações acompanhadas · verificado em ${new Date(d.geradoEm || window.FINHUB_PUBLICADO || Date.now()).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})}</span></div>
+      <button class="btn" type="button" id="auRef">Atualizar agora</button>
+    </div>`;
+  $('auRef').onclick = () => { $('auRef').disabled = true; auAtualizar(); };
+  const card = i => {
+    const cls = auAtencao(i.situacao) ? (['travou','erro'].includes(i.situacao) ? 'atencao' : 'aviso') : (i.situacao==='ok' ? 'bom' : '');
+    const quando = i.tipo==='claude'
+      ? `${auFreq(i)} · última: ${auQuando(i.inicio)}${i.proxima ? ` · próxima: ${auQuando(i.proxima)}` : ''}`
+      : `${i.freq||''}${i.inicio ? ` · última: ${auQuando(i.inicio)}` : ''}`;
+    const hist = (i.execucoes||[]).length ? `<details class="au-hist"><summary>Últimas ${i.execucoes.length} execuções</summary><ol>${
+      i.execucoes.map(e => `<li>${auChip(e.situacao)}<span class="t" title="${esc(e.detalhe||'')}">${auQuando(e.inicio)} · ${esc(e.detalhe||e.titulo)}</span><a href="${esc(e.link)}" title="Abrir esta execução no Claude">Abrir ›</a></li>`).join('')
+    }</ol></details>` : '';
+    const acoes = [];
+    if (i.link) acoes.push(`<a class="btn${auAtencao(i.situacao)?' pri2':''}" href="${esc(i.link)}" title="Abre a execução no app do Claude">Abrir no Claude ›</a>`);
+    if (i.travadasSeguidas > 1) acoes.push(`<span class="au-quando">Travou ${i.travadasSeguidas} vezes seguidas: confira se a tarefa está no modo de permissão Auto.</span>`);
+    return `<article class="au-card ${cls}">
+      <div class="au-topo"><h3>${esc(i.nome)}</h3>${auChip(i.situacao)}</div>
+      <div class="au-quando">${esc(quando)}${i.modulo ? ` · módulo ${esc(i.modulo)}` : ''}</div>
+      <div class="au-det"><b>${esc(i.titulo)}.</b> ${esc(i.detalhe||'')}</div>
+      ${acoes.length ? `<div class="au-acoes">${acoes.join('')}</div>` : ''}
+      ${hist}
+    </article>`;
+  };
+  const ordem = (a,b) => (auAtencao(b.situacao) - auAtencao(a.situacao));
+  const claude = d.itens.filter(i => i.tipo==='claude').sort(ordem), outras = d.itens.filter(i => i.tipo!=='claude').sort(ordem);
+  $('auLista').innerHTML = `<h2 class="au-grupo">Tarefas agendadas do Claude</h2><div class="au-lista">${claude.map(card).join('')}</div>
+    <h2 class="au-grupo">Rotinas do FinHub e do Cowork</h2><div class="au-lista">${outras.map(card).join('')}</div>`;
+  auBadge();
+}
+async function auBadge(){
+  const t = document.querySelector('.tile[data-id="automacoes"]'); if (!t) return;
+  try {
+    const d = AU.dados && AU.dados.geradoEm && Date.now() - new Date(AU.dados.geradoEm) < 60e3 ? AU.dados : (AU.dados = await auBuscar());
+    t.querySelector('.alerta')?.remove();
+    t.insertAdjacentHTML('beforeend', d.ok ? '<span class="alerta ok">✓ Tudo certo</span>' : `<span class="alerta">! ${d.atencao} com problema</span>`);
+  } catch(e) {}
+}
 
 function enter(u){
   $('who').innerHTML = `<span>Olá, <b>${u}</b></span><button class="btn" id="sair" type="button">Trocar usuário</button>`;
