@@ -34,5 +34,11 @@
   "guias": 1,
   "emitidas": 1,
   "semPlanilha": false
+ },
+ {
+  "data": "2026-11-23",
+  "guias": 3,
+  "emitidas": 0,
+  "semPlanilha": false
  }
 ]

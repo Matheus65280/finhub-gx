@@ -1,0 +1,50 @@
+{
+ "data": "2026-11-23",
+ "guias": [
+  {
+   "nf": "8578",
+   "cnpj": "10.319.758/0021-94",
+   "loja": "AFEET 76",
+   "emissao": "2026-11-20",
+   "vencimento": "2026-11-23",
+   "referencia": "11/2026",
+   "valor": 85.8,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 8578",
+   "status": "pendente",
+   "municipio": "VILA VELHA",
+   "cMun": "3205200"
+  },
+  {
+   "nf": "1527",
+   "cnpj": "10.319.758/0025-18",
+   "loja": "AFEET 169",
+   "emissao": "2026-11-19",
+   "vencimento": "2026-11-23",
+   "referencia": "11/2026",
+   "valor": 46.8,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 1527",
+   "status": "pendente",
+   "municipio": "VILA VELHA",
+   "cMun": "3205200"
+  },
+  {
+   "nf": "10856",
+   "cnpj": "23.473.808/0013-25",
+   "loja": "AWK 69",
+   "emissao": "2026-11-21",
+   "vencimento": "2026-11-23",
+   "referencia": "11/2026",
+   "valor": 130.0,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 10856",
+   "status": "pendente",
+   "municipio": "SERRA",
+   "cMun": "3205002"
+  }
+ ],
+ "planilha": "C:\\Users\\GX\\Desktop\\GNRE Diaria\\2026\\11-2026\\23-11\\planilha_contas_a_pagar_gnre_23-11.xls",
+ "lidoEm": "2026-11-23T08:36:20",
+ "atualizadoEm": "2026-11-23T08:36:20"
+}
