@@ -11,9 +11,12 @@
    "valor": 85.8,
    "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
    "infoAdicional": "NF 8578",
-   "status": "pendente",
+   "status": "emitida",
    "municipio": "VILA VELHA",
-   "cMun": "3205200"
+   "cMun": "3205200",
+   "dua": "4036848017",
+   "pdf": "dados/gnre-es/pdf/2026-11-23/DUA_4036848017_AFEET76_NF8578.pdf",
+   "emitidaEm": "2026-11-23T08:40:02"
   },
   {
    "nf": "1527",
@@ -25,9 +28,12 @@
    "valor": 46.8,
    "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
    "infoAdicional": "NF 1527",
-   "status": "pendente",
+   "status": "emitida",
    "municipio": "VILA VELHA",
-   "cMun": "3205200"
+   "cMun": "3205200",
+   "dua": "4036848202",
+   "pdf": "dados/gnre-es/pdf/2026-11-23/DUA_4036848202_AFEET169_NF1527.pdf",
+   "emitidaEm": "2026-11-23T08:44:13"
   },
   {
    "nf": "10856",
@@ -45,6 +51,6 @@
   }
  ],
  "planilha": "C:\\Users\\GX\\Desktop\\GNRE Diaria\\2026\\11-2026\\23-11\\planilha_contas_a_pagar_gnre_23-11.xls",
- "lidoEm": "2026-11-23T08:36:20",
- "atualizadoEm": "2026-11-23T08:36:20"
+ "lidoEm": "2026-11-23T08:46:06",
+ "atualizadoEm": "2026-11-23T08:46:06"
 }
