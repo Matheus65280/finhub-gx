@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-23T11:06:15-03:00";</script>
+<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-23T11:10:11-03:00";</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FinHub GX</title>
@@ -1664,8 +1664,9 @@ const AU = { dados:null, timer:null };
 const AU_ST = {
   ok:['emitida','✓','Rodou certo'], travou:['erro','✕','Travou'], erro:['erro','✕','Erro'],
   bloqueada:['aviso','!','Pediu decisão'], 'nao-rodou':['aviso','!','Não rodou'],
-  rodando:['neutro','↻','Rodando'], aguardando:['neutro','…','Aguardando'],
+  rodando:['neutro','↻','Rodando'], aguardando:['neutro','…','Aguardando'], desativada:['neutro','⏸','Desativada'],
 };
+const AU_GRUPOS = ['FinHub GX','Docas GX','Cowork','Outras automações'];
 const auAtencao = s => ['travou','erro','bloqueada','nao-rodou'].includes(s);
 const auQuando = s => s ? new Date(s).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).replace(',', ' às') : '–';
 const auFreq = i => i.freq==='diaria' ? `Todo dia às ${i.hora}` : i.freq==='seg-sex' ? `Seg a sex às ${i.hora}` : i.freq==='mensal' ? `Todo dia ${i.dia} às ${i.hora}` : (i.freq||'');
@@ -1702,9 +1703,7 @@ function renderAutomacoes(){
   $('auRef').onclick = () => { $('auRef').disabled = true; auAtualizar(); };
   const card = i => {
     const cls = auAtencao(i.situacao) ? (['travou','erro'].includes(i.situacao) ? 'atencao' : 'aviso') : (i.situacao==='ok' ? 'bom' : '');
-    const quando = i.tipo==='claude'
-      ? `${auFreq(i)} · última: ${auQuando(i.inicio)}${i.proxima ? ` · próxima: ${auQuando(i.proxima)}` : ''}`
-      : `${i.freq||''}${i.inicio ? ` · última: ${auQuando(i.inicio)}` : ''}`;
+    const quando = [i.freq && i.freq!=='desconhecida' && i.tipo!=='windows' ? auFreq(i) : '', i.inicio ? `última: ${auQuando(i.inicio)}` : '', i.proxima ? `próxima: ${auQuando(i.proxima)}` : ''].filter(Boolean).join(' · ');
     const hist = (i.execucoes||[]).length ? `<details class="au-hist"><summary>Últimas ${i.execucoes.length} execuções</summary><ol>${
       i.execucoes.map(e => `<li>${auChip(e.situacao)}<span class="t" title="${esc(e.detalhe||'')}">${auQuando(e.inicio)} · ${esc(e.detalhe||e.titulo)}</span><a href="${esc(e.link)}" title="Abrir esta execução no Claude">Abrir ›</a></li>`).join('')
     }</ol></details>` : '';
@@ -1713,16 +1712,22 @@ function renderAutomacoes(){
     if (i.travadasSeguidas > 1) acoes.push(`<span class="au-quando">Travou ${i.travadasSeguidas} vezes seguidas: confira se a tarefa está no modo de permissão Auto.</span>`);
     return `<article class="au-card ${cls}">
       <div class="au-topo"><h3>${esc(i.nome)}</h3>${auChip(i.situacao)}</div>
-      <div class="au-quando">${esc(quando)}${i.modulo ? ` · módulo ${esc(i.modulo)}` : ''}</div>
+      <div class="au-quando">${esc(i.origem||'')}${quando ? ` · ${esc(quando)}` : ''}${i.modulo ? ` · módulo ${esc(i.modulo)}` : ''}</div>
       <div class="au-det"><b>${esc(i.titulo)}.</b> ${esc(i.detalhe||'')}</div>
       ${acoes.length ? `<div class="au-acoes">${acoes.join('')}</div>` : ''}
       ${hist}
     </article>`;
   };
-  const ordem = (a,b) => (auAtencao(b.situacao) - auAtencao(a.situacao));
-  const claude = d.itens.filter(i => i.tipo==='claude').sort(ordem), outras = d.itens.filter(i => i.tipo!=='claude').sort(ordem);
-  $('auLista').innerHTML = `<h2 class="au-grupo">Tarefas agendadas do Claude</h2><div class="au-lista">${claude.map(card).join('')}</div>
-    <h2 class="au-grupo">Rotinas do FinHub e do Cowork</h2><div class="au-lista">${outras.map(card).join('')}</div>`;
+  // por sistema; dentro de cada um, primeiro o que precisa de atenção, depois o que está ativo, por último as desativadas
+  const peso = s => auAtencao(s) ? 0 : s==='desativada' ? 2 : 1;
+  const grupos = [...new Set([...AU_GRUPOS, ...d.itens.map(i => i.grupo || 'Outras automações')])];
+  $('auLista').innerHTML = grupos.map(g => {
+    const its = d.itens.filter(i => (i.grupo || 'Outras automações') === g).sort((a,b) => peso(a.situacao) - peso(b.situacao));
+    if (!its.length) return '';
+    const n = its.filter(i => auAtencao(i.situacao)).length;
+    return `<h2 class="au-grupo">${esc(g)} · ${its.length} automaç${its.length>1?'ões':'ão'}${n ? ` · <span style="color:var(--gx-danger)">${n} com problema</span>` : ' · tudo certo'}</h2>
+      <div class="au-lista">${its.map(card).join('')}</div>`;
+  }).join('');
   auBadge();
 }
 async function auBadge(){
