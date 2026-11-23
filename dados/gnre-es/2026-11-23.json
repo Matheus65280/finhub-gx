@@ -45,12 +45,15 @@
    "valor": 130.0,
    "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
    "infoAdicional": "NF 10856",
-   "status": "pendente",
+   "status": "emitida",
    "municipio": "SERRA",
-   "cMun": "3205002"
+   "cMun": "3205002",
+   "dua": "4036849467",
+   "pdf": "dados/gnre-es/pdf/2026-11-23/DUA_4036849467_AWK69_NF10856.pdf",
+   "emitidaEm": "2026-11-23T09:15:03"
   }
  ],
  "planilha": "C:\\Users\\GX\\Desktop\\GNRE Diaria\\2026\\11-2026\\23-11\\planilha_contas_a_pagar_gnre_23-11.xls",
- "lidoEm": "2026-11-23T08:46:06",
- "atualizadoEm": "2026-11-23T08:46:06"
+ "lidoEm": "2026-11-23T09:15:37",
+ "atualizadoEm": "2026-11-23T09:15:37"
 }
