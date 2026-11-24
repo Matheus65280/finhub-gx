@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-24T10:06:12-03:00";</script>
+<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-24T10:33:35-03:00";</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FinHub GX</title>
@@ -461,6 +461,21 @@ dialog.cfg .dh button{color:var(--gx-muted)}
 /* não cobrir o fim da página */
 body{padding-bottom:56px}
 
+/* ---------- Aviso de PDF novo das notas (canto inferior direito, acima do indicador da VPN) ---------- */
+.ns-toast{position:fixed;right:16px;bottom:64px;z-index:950;display:none;align-items:center;gap:12px;max-width:min(420px,calc(100vw - 32px));
+  background:var(--gx-surface);color:var(--gx-text);border:1px solid var(--gx-border);border-left:4px solid var(--gx-primary);
+  border-radius:var(--gx-radius-md);box-shadow:0 10px 30px rgba(16,24,40,.18);padding:12px 12px 12px 14px}
+.ns-toast.on{display:flex}
+.ns-toast .ico{font-size:22px}
+.ns-toast b{display:block;font-size:14px}
+.ns-toast span{font-size:12.5px;color:var(--gx-muted)}
+.ns-toast .btn{min-height:36px;padding:6px 14px}
+.ns-toast .ns-x{border:0;background:none;color:var(--gx-muted);font-size:20px;cursor:pointer;padding:0 4px;line-height:1}
+.tile .alerta.aviso{background:#FFFAEB;color:var(--gx-warning);border-color:#FEDF89}
+:root[data-theme="dark"] .ns-toast{background:#24262D;box-shadow:0 10px 30px rgba(0,0,0,.55)}
+:root[data-theme="dark"] .tile .alerta.aviso{background:rgba(180,83,9,.22);color:#FBBF24;border-color:rgba(251,191,36,.45)}
+@media (max-width:767px){.ns-toast{right:12px;left:12px;bottom:56px;max-width:none}}
+
 /* ---------- Botão de tema (abre sempre no diurno) ---------- */
 .tema{display:inline-flex;align-items:center;gap:6px}
 .tema svg{width:16px;height:16px;flex:none}
@@ -777,6 +792,7 @@ function renderModules(){
     </button>`; }).join('');
   $('modules').querySelectorAll('.tile:not(.locked)').forEach(b=>b.onclick=()=>{ const m=MODULES.find(x=>x.id===b.dataset.id); m.abrir&&m.abrir(); });
   auBadge();
+  if (typeof nsMarcarCard === 'function') nsMarcarCard();
 }
 
 /* ================= FATURAMENTO ================= */
@@ -1531,7 +1547,10 @@ function renderNotasForaSp(){
     imps: NS.impressoes.filter(i => i.arquivo === a.nome).sort((x,y)=>y.em.localeCompare(x.em)) }))
     .sort((x,y) => (y.per?.fim||y.modificadoEm).localeCompare(x.per?.fim||x.modificadoEm));
   const pend = linhas.filter(l=>!l.imps.length).length;
-  $('nAtual').innerHTML = linhas.length ? `<b>${linhas.length}</b> arquivo(s) · <b>${pend}</b> ainda não impresso(s)` : '';
+  const ultAviso = (NS.avisos||[]).slice(-1)[0];
+  $('nAtual').innerHTML = (linhas.length ? `<b>${linhas.length}</b> arquivo(s) · <b>${pend}</b> ainda não impresso(s)` : '') +
+    (ultAviso ? `<br>Última subida de notas no F360 concluída em <b>${nsDataHora(ultAviso.em)}</b>` : '') +
+    `<br><span style="color:var(--gx-muted)">A lista se atualiza sozinha a cada minuto.</span>`;
   if (!linhas.length) {
     $('nCorpo').innerHTML = `<div class="vazio-es"><div class="ceu">${ES_PENA}<i class="chao"></i></div><b>Não temos nada por aqui</b><span>Nenhum PDF notas_mg_sc_… encontrado em Downloads.</span></div>`;
     return;
@@ -1551,6 +1570,47 @@ function renderNotasForaSp(){
   }</tbody></table></div>`;
   $('nCorpo').querySelectorAll('button[data-i]').forEach(b => b.onclick = () => imprimirNotaSp(linhas[+b.dataset.i], b));
 }
+/* Vigia de PDFs novos: a subida das notas no F360 termina em horários variados (às vezes no fim da manhã).
+   A cada minuto o FinHub confere a lista; se chegou PDF novo, atualiza a tela (se aberta), mostra um aviso
+   no canto da tela e marca o card do módulo. A automação também pode avisar na hora (POST /notas/pronto). */
+const NSV = { vistos:null, timer:null };
+function nsMarcarCard(){
+  const t = document.querySelector('.tile[data-id="notas-fora-sp"]'); if (!t || !NS.arquivos) return;
+  t.querySelector('.alerta')?.remove();
+  const pend = NS.arquivos.filter(a => !(NS.impressoes||[]).some(i => i.arquivo === a.nome))
+    .filter(a => Date.now() - new Date(a.modificadoEm) < 7*864e5);
+  if (pend.length) t.insertAdjacentHTML('beforeend', `<span class="alerta aviso">${pend.length} PDF${pend.length>1?'s':''} não impresso${pend.length>1?'s':''}</span>`);
+}
+function nsAvisar(novos){
+  let box = document.getElementById('nsToast');
+  if (!box) { document.body.insertAdjacentHTML('beforeend', '<div class="ns-toast" id="nsToast" role="status" aria-live="polite"></div>'); box = document.getElementById('nsToast'); }
+  const l = novos[0], per = nsPeriodo(l.nome);
+  const tit = per ? (per.ini===per.fim ? `Notas de ${esData(per.ini)}` : `Notas de ${esData(per.ini)} até ${esData(per.fim)}`) : l.nome;
+  box.innerHTML = `<span class="ico" aria-hidden="true">📄</span><div><b>PDF novo das notas MG/SC</b><span>${esc(tit)}${novos.length>1?` e mais ${novos.length-1}`:''} · chegou ${nsDataHora(l.modificadoEm)}</span></div>
+    <button class="btn pri2" type="button" id="nsToastAbrir">Abrir</button><button class="ns-x" type="button" id="nsToastX" aria-label="Fechar aviso">×</button>`;
+  box.classList.add('on');
+  $('nsToastAbrir').onclick = () => { box.classList.remove('on'); abrirNotasForaSp(); };
+  $('nsToastX').onclick = () => box.classList.remove('on');
+}
+async function nsVigiar(){
+  try {
+    const r = await fetch(RECEPTOR + '/notas', { cache:'no-store' });
+    if (!r.ok) return;
+    const d = await r.json();
+    const nomes = new Set(d.arquivos.map(a => a.nome));
+    if (NSV.vistos) {
+      const novos = d.arquivos.filter(a => !NSV.vistos.has(a.nome)).sort((x,y)=>y.modificadoEm.localeCompare(x.modificadoEm));
+      if (novos.length) nsAvisar(novos);
+    }
+    NSV.vistos = nomes;
+    Object.assign(NS, d);
+    if ($('screenNotasSp').classList.contains('active')) renderNotasForaSp();
+    nsMarcarCard();
+  } catch(e) {}
+}
+document.addEventListener('DOMContentLoaded', () => { nsVigiar(); NSV.timer = setInterval(nsVigiar, 60e3); });
+document.addEventListener('visibilitychange', () => { if (!document.hidden) nsVigiar(); });
+
 async function imprimirNotaSp(l, b){
   const usuario = getUser();
   if (!usuario) { alert('Escolha o usuário antes de imprimir.'); return; }
