@@ -1,0 +1,39 @@
+{
+ "data": "2026-11-24",
+ "guias": [
+  {
+   "nf": "4250",
+   "cnpj": "10.319.758/0023-56",
+   "loja": "AFEET 203",
+   "emissao": "2026-11-23",
+   "vencimento": "2026-11-24",
+   "referencia": "11/2026",
+   "valor": 27.3,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 4250",
+   "status": "emitida",
+   "municipio": "IUNA",
+   "cMun": "3203007",
+   "dua": "4036891144",
+   "pdf": "dados/gnre-es/pdf/2026-11-24/DUA_4036891144_AFEET203_NF4250.pdf",
+   "emitidaEm": "2026-11-24T08:35:24"
+  },
+  {
+   "nf": "20456",
+   "cnpj": "10.319.758/0005-74",
+   "loja": "AWK 13",
+   "emissao": "2026-11-23",
+   "vencimento": "2026-11-24",
+   "referencia": "11/2026",
+   "valor": 72.8,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 20456",
+   "status": "pendente",
+   "municipio": "IUNA",
+   "cMun": "3203007"
+  }
+ ],
+ "planilha": "C:\\Users\\GX\\Desktop\\GNRE Diaria\\2026\\11-2026\\24-11\\planilha_contas_a_pagar_gnre_24-11.xls",
+ "lidoEm": "2026-11-24T08:35:25",
+ "atualizadoEm": "2026-11-24T08:35:25"
+}
