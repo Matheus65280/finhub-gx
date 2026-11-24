@@ -28,12 +28,15 @@
    "valor": 72.8,
    "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
    "infoAdicional": "NF 20456",
-   "status": "pendente",
+   "status": "emitida",
    "municipio": "IUNA",
-   "cMun": "3203007"
+   "cMun": "3203007",
+   "dua": "4036891216",
+   "pdf": "dados/gnre-es/pdf/2026-11-24/DUA_4036891216_AWK13_NF20456.pdf",
+   "emitidaEm": "2026-11-24T08:37:34"
   }
  ],
  "planilha": "C:\\Users\\GX\\Desktop\\GNRE Diaria\\2026\\11-2026\\24-11\\planilha_contas_a_pagar_gnre_24-11.xls",
- "lidoEm": "2026-11-24T08:35:25",
- "atualizadoEm": "2026-11-24T08:35:25"
+ "lidoEm": "2026-11-24T08:37:35",
+ "atualizadoEm": "2026-11-24T08:37:35"
 }
