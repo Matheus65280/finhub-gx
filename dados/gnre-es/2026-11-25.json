@@ -1,0 +1,50 @@
+{
+ "data": "2026-11-25",
+ "guias": [
+  {
+   "nf": "12222",
+   "cnpj": "10.319.758/0017-08",
+   "loja": "AFEET 106",
+   "emissao": "2026-11-24",
+   "vencimento": "2026-11-25",
+   "referencia": "11/2026",
+   "valor": 67.5,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 12222",
+   "status": "pendente",
+   "municipio": "VITORIA",
+   "cMun": "3205309"
+  },
+  {
+   "nf": "12224",
+   "cnpj": "10.319.758/0017-08",
+   "loja": "AFEET 106",
+   "emissao": "2026-11-24",
+   "vencimento": "2026-11-25",
+   "referencia": "11/2026",
+   "valor": 67.5,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 12224",
+   "status": "pendente",
+   "municipio": "VITORIA",
+   "cMun": "3205309"
+  },
+  {
+   "nf": "8827",
+   "cnpj": "23.473.808/0003-53",
+   "loja": "AWK 53",
+   "emissao": "2026-11-24",
+   "vencimento": "2026-11-25",
+   "referencia": "11/2026",
+   "valor": 61.14,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 8827",
+   "status": "pendente",
+   "municipio": "DOMINGOS MARTINS",
+   "cMun": "3201902"
+  }
+ ],
+ "planilha": "C:\\Users\\GX\\Desktop\\GNRE Diaria\\2026\\11-2026\\25-11\\planilha_contas_a_pagar_gnre_25-11.xls",
+ "lidoEm": "2026-11-25T09:04:45",
+ "atualizadoEm": "2026-11-25T09:04:45"
+}
