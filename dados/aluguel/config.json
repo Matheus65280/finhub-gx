@@ -564,8 +564,13 @@
    "codigo": "08",
    "nome": "Shopping ABC",
    "grupo": "MACCA",
-   "situacao": "aguardando",
-   "percentuais": [],
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-10",
+     "pct": 6
+    }
+   ],
    "campos": {
     "nfce": true,
     "nfe102": true,
@@ -573,7 +578,12 @@
     "nfe202": true
    },
    "obs": "Loja Macca. Percentual ainda não definido.",
-   "alugueis": [],
+   "alugueis": [
+    {
+     "desde": "2026-10",
+     "valor": 2418531
+    }
+   ],
    "vencimento": ""
   },
   {
@@ -582,8 +592,13 @@
    "codigo": "27",
    "nome": "Shopping Villa Lobos",
    "grupo": "MACCA",
-   "situacao": "aguardando",
-   "percentuais": [],
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-10",
+     "pct": 5
+    }
+   ],
    "campos": {
     "nfce": true,
     "nfe102": true,
@@ -591,7 +606,12 @@
     "nfe202": true
    },
    "obs": "Loja Macca. Percentual ainda não definido.",
-   "alugueis": [],
+   "alugueis": [
+    {
+     "desde": "2026-10",
+     "valor": 1952158
+    }
+   ],
    "vencimento": ""
   },
   {
@@ -600,8 +620,13 @@
    "codigo": "43",
    "nome": "Shopping Plaza Sul",
    "grupo": "MACCA",
-   "situacao": "aguardando",
-   "percentuais": [],
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-10",
+     "pct": 5
+    }
+   ],
    "campos": {
     "nfce": true,
     "nfe102": true,
@@ -609,7 +634,12 @@
     "nfe202": true
    },
    "obs": "Loja Macca. Percentual ainda não definido.",
-   "alugueis": [],
+   "alugueis": [
+    {
+     "desde": "2026-10",
+     "valor": 1644689
+    }
+   ],
    "vencimento": ""
   },
   {
@@ -618,8 +648,13 @@
    "codigo": "93",
    "nome": "Shopping SP Market",
    "grupo": "MACCA",
-   "situacao": "aguardando",
-   "percentuais": [],
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-10",
+     "pct": 5
+    }
+   ],
    "campos": {
     "nfce": true,
     "nfe102": true,
@@ -627,7 +662,12 @@
     "nfe202": true
    },
    "obs": "Loja Macca. Percentual ainda não definido.",
-   "alugueis": [],
+   "alugueis": [
+    {
+     "desde": "2026-10",
+     "valor": 1197072
+    }
+   ],
    "vencimento": ""
   },
   {
@@ -636,8 +676,13 @@
    "codigo": "126",
    "nome": "São Bernardo Plaza Shopping",
    "grupo": "MACCA",
-   "situacao": "aguardando",
-   "percentuais": [],
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-10",
+     "pct": 5
+    }
+   ],
    "campos": {
     "nfce": true,
     "nfe102": true,
@@ -645,7 +690,12 @@
     "nfe202": true
    },
    "obs": "Loja Macca. Percentual ainda não definido.",
-   "alugueis": [],
+   "alugueis": [
+    {
+     "desde": "2026-10",
+     "valor": 1117786
+    }
+   ],
    "vencimento": ""
   },
   {
@@ -654,8 +704,13 @@
    "codigo": "163",
    "nome": "Shopping Campo Limpo II",
    "grupo": "MACCA",
-   "situacao": "aguardando",
-   "percentuais": [],
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-10",
+     "pct": 5
+    }
+   ],
    "campos": {
     "nfce": true,
     "nfe102": true,
@@ -663,7 +718,12 @@
     "nfe202": true
    },
    "obs": "Loja Macca. Percentual ainda não definido.",
-   "alugueis": [],
+   "alugueis": [
+    {
+     "desde": "2026-10",
+     "valor": 1700364
+    }
+   ],
    "vencimento": ""
   },
   {
@@ -700,8 +760,13 @@
    "codigo": "16",
    "nome": "Shopping Villa Lobos",
    "grupo": "MACCA",
-   "situacao": "aguardando",
-   "percentuais": [],
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-10",
+     "pct": 5
+    }
+   ],
    "campos": {
     "nfce": true,
     "nfe102": true,
@@ -709,7 +774,12 @@
     "nfe202": true
    },
    "obs": "Loja Macca. Percentual ainda não definido.",
-   "alugueis": [],
+   "alugueis": [
+    {
+     "desde": "2026-10",
+     "valor": 1615681
+    }
+   ],
    "vencimento": ""
   },
   {
@@ -718,8 +788,13 @@
    "codigo": "25",
    "nome": "Shopping Plaza Sul",
    "grupo": "MACCA",
-   "situacao": "aguardando",
-   "percentuais": [],
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-10",
+     "pct": 5
+    }
+   ],
    "campos": {
     "nfce": true,
     "nfe102": true,
@@ -727,7 +802,12 @@
     "nfe202": true
    },
    "obs": "Loja Macca. Percentual ainda não definido.",
-   "alugueis": [],
+   "alugueis": [
+    {
+     "desde": "2026-10",
+     "valor": 2089162
+    }
+   ],
    "vencimento": ""
   },
   {
@@ -736,8 +816,13 @@
    "codigo": "36",
    "nome": "Shopping Campo Limpo",
    "grupo": "MACCA",
-   "situacao": "aguardando",
-   "percentuais": [],
+   "situacao": "ativa",
+   "percentuais": [
+    {
+     "desde": "2026-10",
+     "pct": 5
+    }
+   ],
    "campos": {
     "nfce": true,
     "nfe102": true,
@@ -745,7 +830,12 @@
     "nfe202": true
    },
    "obs": "Loja Macca. Percentual ainda não definido.",
-   "alugueis": [],
+   "alugueis": [
+    {
+     "desde": "2026-10",
+     "valor": 1982104
+    }
+   ],
    "vencimento": ""
   },
   {
@@ -795,6 +885,6 @@
    "vencimento": ""
   }
  ],
- "atualizadoEm": "2026-11-25T15:30:13",
+ "atualizadoEm": "2026-11-25T16:05:27",
  "atualizadoPor": "MATHEUS"
 }
