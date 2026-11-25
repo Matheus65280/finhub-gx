@@ -11,9 +11,12 @@
    "valor": 67.5,
    "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
    "infoAdicional": "NF 12222",
-   "status": "pendente",
+   "status": "emitida",
    "municipio": "VITORIA",
-   "cMun": "3205309"
+   "cMun": "3205309",
+   "dua": "4036956455",
+   "pdf": "dados/gnre-es/pdf/2026-11-25/DUA_4036956455_AFEET106_NF12222.pdf",
+   "emitidaEm": "2026-11-25T09:07:02"
   },
   {
    "nf": "12224",
@@ -25,9 +28,12 @@
    "valor": 67.5,
    "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
    "infoAdicional": "NF 12224",
-   "status": "pendente",
+   "status": "emitida",
    "municipio": "VITORIA",
-   "cMun": "3205309"
+   "cMun": "3205309",
+   "dua": "4036956577",
+   "pdf": "dados/gnre-es/pdf/2026-11-25/DUA_4036956577_AFEET106_NF12224.pdf",
+   "emitidaEm": "2026-11-25T09:09:21"
   },
   {
    "nf": "8827",
@@ -39,12 +45,15 @@
    "valor": 61.14,
    "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
    "infoAdicional": "NF 8827",
-   "status": "pendente",
+   "status": "emitida",
    "municipio": "DOMINGOS MARTINS",
-   "cMun": "3201902"
+   "cMun": "3201902",
+   "dua": "4036956671",
+   "pdf": "dados/gnre-es/pdf/2026-11-25/DUA_4036956671_AWK53_NF8827.pdf",
+   "emitidaEm": "2026-11-25T09:10:57"
   }
  ],
  "planilha": "C:\\Users\\GX\\Desktop\\GNRE Diaria\\2026\\11-2026\\25-11\\planilha_contas_a_pagar_gnre_25-11.xls",
- "lidoEm": "2026-11-25T09:04:45",
- "atualizadoEm": "2026-11-25T09:04:45"
+ "lidoEm": "2026-11-25T09:10:58",
+ "atualizadoEm": "2026-11-25T09:10:58"
 }
