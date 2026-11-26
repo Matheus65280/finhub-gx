@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-26T12:16:13-03:00";</script>
+<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-26T12:23:49-03:00";</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FinHub GX</title>
@@ -461,6 +461,48 @@ dialog.cfg .dh button{color:var(--gx-muted)}
 /* não cobrir o fim da página */
 body{padding-bottom:56px}
 
+/* ---------- Encontro de contas 48/49 (extrato) ---------- */
+.ec-busca{flex:1;min-width:200px}
+.ec-busca input,#ecArqObs{width:100%}
+.ec-acoes{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:12px;margin-top:4px}
+@media (max-width:900px){.ec-acoes{grid-template-columns:minmax(0,1fr)}}
+.ec-card{background:var(--gx-surface);border:1px solid var(--gx-border);border-radius:var(--gx-radius-md);box-shadow:var(--gx-shadow);padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.ec-card h2{font-size:16px;font-weight:600;margin:0}
+.ec-campos{display:grid;grid-template-columns:150px minmax(0,1fr) 130px;gap:10px 12px;align-items:end}
+.ec-campos .ec-desc{grid-column:2/4}
+.ec-campos label{display:block;font-size:12.5px;font-weight:600;color:var(--gx-muted);margin-bottom:4px}
+.ec-campos input,.ec-campos select{width:100%}
+@media (max-width:600px){.ec-campos{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.ec-campos .ec-desc{grid-column:1/-1}}
+.ec-tipo{display:flex;width:100%}.ec-tipo button{flex:1}
+.ec-tipo button[data-v="C"][aria-pressed="true"]{background:var(--gx-success);color:#fff}
+.ec-tipo button[data-v="D"][aria-pressed="true"]{background:var(--gx-danger);color:#fff}
+.ec-rodape{display:flex;align-items:center;gap:12px;justify-content:flex-end}
+.ec-erro{color:var(--gx-danger);font-size:13px;margin-right:auto}
+.ec-dica{font-size:13px;color:var(--gx-muted);margin:0}
+.ec-drop{padding:16px;font-size:13.5px}
+.ec-plan{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:12.5px}
+.ec-plan li{display:flex;align-items:center;gap:8px;border-top:1px solid var(--gx-border);padding-top:6px;min-width:0}
+.ec-plan li a{font-weight:600;color:var(--gx-primary-text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ec-plan li span.q{color:var(--gx-muted);margin-left:auto;white-space:nowrap}
+table.ec{width:100%;min-width:860px;border-collapse:collapse;font-size:13.5px}
+table.ec th,table.ec td{padding:9px 12px;border-bottom:1px solid var(--gx-border);text-align:left;vertical-align:middle}
+table.ec th.n,table.ec td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+table.ec td.c{color:var(--gx-success);font-weight:600}
+table.ec td.d{color:var(--gx-danger);font-weight:600}
+table.ec td.s{font-weight:700}
+table.ec td.s.neg{color:var(--gx-danger)}
+table.ec .ec-sub{display:block;font-size:12px;color:var(--gx-muted)}
+table.ec .ec-ed{font-size:11px;font-weight:700;color:var(--gx-warning);margin-left:6px;cursor:help}
+table.ec tfoot td{background:#F2F4F7;font-weight:700;border-top:2px solid var(--gx-border)}
+.ec-lapis{border:1px solid var(--gx-border);background:var(--gx-surface);color:var(--gx-text);border-radius:var(--gx-radius-sm);width:34px;height:34px;display:inline-grid;place-items:center;cursor:pointer}
+.ec-lapis:hover{border-color:var(--gx-primary);color:var(--gx-primary-text)}
+.ec-lapis svg{width:16px;height:16px}
+.ec-hist{margin-top:14px;font-size:12.5px;color:var(--gx-muted)}
+.ec-hist b{color:var(--gx-text)}
+.ec-hist li{margin-top:4px}
+:root[data-theme="dark"] table.ec tfoot td{background:#17191F}
+:root[data-theme="dark"] table.ec td.c{color:#4ADE80}:root[data-theme="dark"] table.ec td.d,:root[data-theme="dark"] table.ec td.s.neg{color:#F87171}
+
 /* ---------- Aviso de PDF novo das notas (canto inferior direito, acima do indicador da VPN) ---------- */
 .ns-toast{position:fixed;right:16px;bottom:64px;z-index:950;display:none;align-items:center;gap:12px;max-width:min(420px,calc(100vw - 32px));
   background:var(--gx-surface);color:var(--gx-text);border:1px solid var(--gx-border);border-left:4px solid var(--gx-primary);
@@ -670,6 +712,57 @@ html.intro .marca{visibility:hidden}
     </div>
     <div id="nCorpo"></div>
   </section>
+  <section class="screen" id="screenEncontro">
+    <button class="voltar" type="button" onclick="irInicio()">‹ Voltar aos módulos</button>
+    <h1>Encontro de contas 48/49</h1>
+    <p class="sub">Lojas do Shopping Taboão (AWALK 48 e AFEET 49). <b>Crédito</b> = valor recebido / a favor · <b>Débito</b> = valor pago fora da conta do sócio.</p>
+    <div class="barra">
+      <div><label for="ecMes">Período</label><select id="ecMes"></select></div>
+      <div><label>Loja</label><div class="seg" id="ecLoja"></div></div>
+      <div class="ec-busca"><label for="ecBusca">Buscar</label><input type="text" id="ecBusca" placeholder="Descrição, quem lançou…"></div>
+    </div>
+    <div class="kpis" id="ecKpis"></div>
+    <div class="ec-acoes">
+      <form class="ec-card" id="ecForm" autocomplete="off">
+        <h2>Novo lançamento</h2>
+        <div class="ec-campos">
+          <div><label for="ecData">Data</label><input type="date" id="ecData" required></div>
+          <div class="ec-desc"><label for="ecDesc">Descrição</label><input type="text" id="ecDesc" maxlength="300" required placeholder="Ex.: Aluguel pago pela conta da Xambre"></div>
+          <div><label for="ecLojaN">Loja</label><select id="ecLojaN"><option value="AMBAS">48 e 49</option><option value="AW48">AWALK 48</option><option value="AF49">AFEET 49</option></select></div>
+          <div><label>Tipo</label><div class="seg ec-tipo" id="ecTipoN"><button type="button" data-v="C" aria-pressed="true">Crédito</button><button type="button" data-v="D" aria-pressed="false">Débito</button></div></div>
+          <div><label for="ecValor">Valor (R$)</label><input type="text" id="ecValor" inputmode="decimal" placeholder="0,00" required></div>
+        </div>
+        <div class="ec-rodape"><span class="ec-erro" id="ecErro" role="alert"></span><button class="btn pri2" type="submit" id="ecLancar">Lançar</button></div>
+      </form>
+      <div class="ec-card">
+        <h2>Enviar planilha</h2>
+        <p class="ec-dica">Envie a planilha com os lançamentos. Ela fica guardada aqui e o Claude lê e inclui os lançamentos quando você pedir.</p>
+        <label class="drop ec-drop" id="ecDrop"><input type="file" id="ecArq" accept=".xls,.xlsx,.xlsm,.xlsb,.csv,.ods,.pdf" hidden><span id="ecArqTxt">Clique ou arraste a planilha aqui</span></label>
+        <input type="text" id="ecArqObs" maxlength="300" placeholder="Observação (opcional): ex. lançamentos de outubro">
+        <div class="ec-rodape"><span class="ec-erro" id="ecArqErro" role="alert"></span><button class="btn" type="button" id="ecEnviar" disabled>Enviar planilha</button></div>
+        <div id="ecPlanilhas"></div>
+      </div>
+    </div>
+    <h2 class="sec">Extrato</h2>
+    <div class="tabfat" id="ecExtrato"></div>
+  </section>
+  <dialog class="cfg" id="ecDlg">
+    <form method="dialog" id="ecDlgForm">
+      <div class="dh"><h2>Editar lançamento</h2><button type="button" id="ecDlgX" aria-label="Fechar">×</button></div>
+      <div class="db">
+        <div class="ec-campos">
+          <div><label for="edData">Data</label><input type="date" id="edData" required></div>
+          <div class="ec-desc"><label for="edDesc">Descrição</label><input type="text" id="edDesc" maxlength="300" required></div>
+          <div><label for="edLoja">Loja</label><select id="edLoja"><option value="AMBAS">48 e 49</option><option value="AW48">AWALK 48</option><option value="AF49">AFEET 49</option></select></div>
+          <div><label>Tipo</label><div class="seg ec-tipo" id="edTipo"><button type="button" data-v="C">Crédito</button><button type="button" data-v="D">Débito</button></div></div>
+          <div><label for="edValor">Valor (R$)</label><input type="text" id="edValor" inputmode="decimal" required></div>
+        </div>
+        <div id="edHist"></div>
+      </div>
+      <div class="df"><span class="erro" id="edErro" role="alert"></span><button class="btn" type="button" id="edCancel">Cancelar</button><button class="btn pri2" type="submit">Salvar alteração</button></div>
+    </form>
+  </dialog>
+
   <section class="screen" id="screenAutom">
     <button class="voltar" type="button" onclick="auSair()">‹ Voltar aos módulos</button>
     <h1>Automações</h1>
@@ -714,6 +807,7 @@ if (ONLINE) {
     const met = String(opt.method || (input && input.method) || 'GET').toUpperCase();
     if (/:8766(\/|$)/.test(url)) {
       if (met === 'GET' && /:8766\/notas(\?|$)/.test(url)) return _fetch(`dados/notas-fora-sp/lista.json?_=${Date.now()}`, { cache:'no-store' });
+      if (met === 'GET' && /:8766\/encontro(\?|$)/.test(url)) return _fetch(`dados/encontro-4849/extrato.json?_=${Date.now()}`, { cache:'no-store' });
       if (met === 'GET' && /:8766\/automacoes(\?|$)/.test(url)) return _fetch(`dados/automacoes/status.json?_=${Date.now()}`, { cache:'no-store' });
       return Promise.reject(new Error(MSG_ONLINE));
     }
@@ -745,7 +839,7 @@ const MODULES = [
   { id:"dare-sp",              title:"Gerar DARE-SP (GNRE)",  locked:false, icon:"doc", abrir:()=>abrirDareSp() },
   { id:"notas-fora-sp",        title:"Notas lojas fora de SP", locked:false, icon:"print", abrir:()=>abrirNotasForaSp() },
   { id:"aluguel-complementar", title:"Aluguel complementar",  locked:false, icon:"building", abrir:()=>abrirAluguel() },
-  { id:"encontro-contas-4849", title:"Encontro de contas 48/49", locked:true, icon:"swap" },
+  { id:"encontro-contas-4849", title:"Encontro de contas 48/49", locked:false, icon:"swap", abrir:()=>abrirEncontro() },
   { id:"faturamento",          title:"Faturamento",           locked:false, icon:"chart", abrir:()=>abrirFaturamento() },
   { id:"automacoes",           title:"Automações",            locked:false, icon:"pulse", abrir:()=>abrirAutomacoes() },
   { id:"conferir-f360",        title:"Conferir nota no F360", locked:false, icon:"scan", abrir:()=>abrirConfF360() },
@@ -1814,6 +1908,154 @@ async function auBadge(){
     t.insertAdjacentHTML('beforeend', d.ok ? '<span class="alerta ok">✓ Tudo certo</span>' : `<span class="alerta">! ${d.atencao} com problema</span>`);
   } catch(e) {}
 }
+
+/* ================= ENCONTRO DE CONTAS 48/49 =================
+   Extrato dos valores das lojas do Shopping Taboão (AWALK 48 / AFEET 49) para o encontro de contas com o sócio.
+   Dados no receptor (servidor/encontro.py): GET /encontro, POST /encontro/lancamento (incluir/editar),
+   POST /encontro/planilha (envio de planilha para o Claude ler e incluir). */
+const EC = { dados:{lancamentos:[], planilhas:[]}, mes:'todos', loja:'TODAS', busca:'', tipoN:'C', edit:null, tipoEd:'C', arquivo:null };
+const EC_LOJA = { AW48:'AWALK 48', AF49:'AFEET 49', AMBAS:'48 e 49' };
+const EC_LAPIS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>';
+const ecData = s => s ? s.split('-').reverse().join('/') : '';
+const ecMesTxt = m => { const [a,mm] = m.split('-'); return `${MESES[+mm-1]} / ${a}`; };
+const ecAssinado = l => l.tipo === 'C' ? l.valor : -l.valor;
+
+async function ecCarregar(){
+  const r = await fetch(`${RECEPTOR}/encontro?_=${Date.now()}`, { cache:'no-store' });
+  if (!r.ok) throw new Error(await r.text() || `erro ${r.status}`);
+  EC.dados = await r.json();
+}
+async function ecPost(rota, corpo){
+  const r = await fetch(RECEPTOR + rota, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(corpo) });
+  const t = await r.text(); if (!r.ok) throw new Error(t || `erro ${r.status}`); return JSON.parse(t||'{}');
+}
+function ecSeg(el, key, opts, fn){
+  $(el).querySelectorAll('button').forEach(b => {
+    b.setAttribute('aria-pressed', String(b.dataset.v === EC[key]));
+    b.onclick = () => { EC[key] = b.dataset.v; ecSeg(el, key, opts, fn); fn && fn(); };
+  });
+}
+async function abrirEncontro(){
+  show('screenEncontro'); window.scrollTo(0,0);
+  $('ecData').value = new Date(Date.now() - new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+  $('ecLoja').innerHTML = [['TODAS','Todas'],['AW48','AWALK 48'],['AF49','AFEET 49'],['AMBAS','48 e 49']].map(([v,t])=>`<button type="button" data-v="${v}">${t}</button>`).join('');
+  ecSeg('ecLoja','loja',null, renderEncontro);
+  ecSeg('ecTipoN','tipoN');
+  $('ecExtrato').innerHTML = '<div class="vazio">Carregando…</div>';
+  try { await ecCarregar(); } catch(e) { $('ecExtrato').innerHTML = `<div class="vazio">Não consegui falar com o receptor local (porta 8766). ${esc(e.message)}</div>`; return; }
+  renderEncontro();
+}
+function ecFiltrados(){
+  const q = EC.busca.trim().toLowerCase();
+  return EC.dados.lancamentos.filter(l =>
+    (EC.loja === 'TODAS' || l.loja === EC.loja) &&
+    (EC.mes === 'todos' || l.data.slice(0,7) === EC.mes) &&
+    (!q || `${l.descricao} ${l.criadoPor||''} ${l.obs||''}`.toLowerCase().includes(q)));
+}
+function renderEncontro(){
+  const todos = EC.dados.lancamentos;
+  // períodos
+  const meses = [...new Set(todos.map(l => l.data.slice(0,7)))].sort().reverse();
+  if (EC.mes !== 'todos' && !meses.includes(EC.mes)) EC.mes = 'todos';
+  $('ecMes').innerHTML = `<option value="todos">Todo o período</option>` + meses.map(m => `<option value="${m}" ${m===EC.mes?'selected':''}>${ecMesTxt(m)}</option>`).join('');
+  $('ecMes').onchange = e => { EC.mes = e.target.value; renderEncontro(); };
+  $('ecBusca').oninput = e => { EC.busca = e.target.value; renderEncontro(); };
+  // extrato (ordem cronológica, saldo acumulado considerando tudo que veio antes no filtro de loja)
+  const lst = ecFiltrados().sort((a,b) => (a.data + a.criadoEm).localeCompare(b.data + b.criadoEm));
+  const base = EC.mes === 'todos' ? 0 : todos.filter(l => (EC.loja==='TODAS' || l.loja===EC.loja) && l.data.slice(0,7) < EC.mes).reduce((s,l)=>s+ecAssinado(l),0);
+  const cred = lst.filter(l=>l.tipo==='C').reduce((s,l)=>s+l.valor,0), deb = lst.filter(l=>l.tipo==='D').reduce((s,l)=>s+l.valor,0);
+  const saldoTotal = todos.filter(l => EC.loja==='TODAS' || l.loja===EC.loja).reduce((s,l)=>s+ecAssinado(l),0);
+  $('ecKpis').innerHTML = `
+    <div class="kpi"><div class="l">Créditos${EC.mes==='todos'?'':' no período'}</div><div class="v up">${brl(cred)}</div><div class="s">${lst.filter(l=>l.tipo==='C').length} lançamento(s)</div></div>
+    <div class="kpi"><div class="l">Débitos${EC.mes==='todos'?'':' no período'}</div><div class="v down">${brl(deb)}</div><div class="s">${lst.filter(l=>l.tipo==='D').length} lançamento(s)</div></div>
+    <div class="kpi"><div class="l">Saldo${EC.mes==='todos'?'':' do período'}</div><div class="v ${cred-deb<0?'down':''}">${brl(cred-deb)}</div><div class="s">créditos − débitos</div></div>
+    <div class="kpi main"><div class="l">Saldo acumulado${EC.loja==='TODAS'?'':' · '+EC_LOJA[EC.loja]}</div><div class="v">${brl(saldoTotal)}</div><div class="s">${saldoTotal>=0?'a favor':'contra'} · todos os lançamentos</div></div>`;
+  let saldo = base;
+  const linhas = lst.map(l => {
+    saldo += ecAssinado(l);
+    const ed = l.historico && l.historico.length ? `<span class="ec-ed" title="Editado ${l.historico.length}x · última vez por ${esc(l.editadoPor||'')} em ${nsDataHora(l.editadoEm)}">editado</span>` : '';
+    return `<tr>
+      <td>${ecData(l.data)}</td>
+      <td>${esc(l.descricao)}${ed}<span class="ec-sub">${l.origem && l.origem!=='manual' ? esc(l.origem)+' · ' : ''}lançado por ${esc(l.criadoPor||'–')} em ${nsDataHora(l.criadoEm)}</span></td>
+      <td>${EC_LOJA[l.loja]||l.loja}</td>
+      <td class="n c">${l.tipo==='C' ? brl(l.valor) : ''}</td>
+      <td class="n d">${l.tipo==='D' ? brl(l.valor) : ''}</td>
+      <td class="n s ${saldo<0?'neg':''}">${brl(saldo)}</td>
+      <td><button class="ec-lapis" type="button" data-id="${l.id}" title="Editar lançamento" aria-label="Editar lançamento ${esc(l.descricao)}">${EC_LAPIS}</button></td></tr>`;
+  });
+  $('ecExtrato').innerHTML = lst.length ? `<table class="ec"><thead><tr><th>Data</th><th>Descrição</th><th>Loja</th><th class="n">Crédito</th><th class="n">Débito</th><th class="n">Saldo</th><th></th></tr></thead>
+    <tbody>${EC.mes==='todos'?'':`<tr><td></td><td><span class="ec-sub">Saldo anterior</span></td><td></td><td></td><td></td><td class="n s ${base<0?'neg':''}">${brl(base)}</td><td></td></tr>`}${linhas.join('')}</tbody>
+    <tfoot><tr><td colspan="3">Total ${EC.mes==='todos'?'':'do período'}</td><td class="n">${brl(cred)}</td><td class="n">${brl(deb)}</td><td class="n">${brl(saldo)}</td><td></td></tr></tfoot></table>`
+    : `<div class="vazio">${todos.length ? 'Nenhum lançamento com esses filtros.' : 'Nenhum lançamento ainda. Use "Novo lançamento" acima ou envie uma planilha.'}</div>`;
+  $('ecExtrato').querySelectorAll('.ec-lapis').forEach(b => b.onclick = () => ecEditar(b.dataset.id));
+  // planilhas enviadas
+  const sit = { aguardando:['aviso','Aguardando leitura'], incluida:['emitida','Lançamentos incluídos'], erro:['erro','Não foi possível ler'] };
+  const pl = EC.dados.planilhas.slice().reverse().slice(0,8);
+  $('ecPlanilhas').innerHTML = pl.length ? `<ul class="ec-plan">${pl.map(p => `<li><a href="${RECEPTOR}/encontro/planilha/${p.id}" title="Baixar ${esc(p.nome)}">${esc(p.nome)}</a>
+      <span class="st ${sit[p.situacao]?.[0]||'neutro'}">${sit[p.situacao]?.[1]||p.situacao}${p.situacao==='incluida'?` (${p.lancamentosIncluidos})`:''}</span>
+      <span class="q">${esc(p.enviadoPor||'')} · ${nsDataHora(p.enviadoEm)}</span></li>`).join('')}</ul>` : '';
+}
+
+// Novo lançamento
+$('ecForm').addEventListener('submit', async e => {
+  e.preventDefault(); $('ecErro').textContent = '';
+  const valor = alValor($('ecValor').value);
+  if (!valor || isNaN(valor) || valor <= 0) { $('ecErro').textContent = 'Informe um valor maior que zero.'; $('ecValor').focus(); return; }
+  if (!$('ecDesc').value.trim()) { $('ecErro').textContent = 'Informe a descrição.'; $('ecDesc').focus(); return; }
+  $('ecLancar').disabled = true;
+  try {
+    await ecPost('/encontro/lancamento', { data:$('ecData').value, descricao:$('ecDesc').value, loja:$('ecLojaN').value, tipo:EC.tipoN, valor, usuario:getUser()||'' });
+    $('ecDesc').value = ''; $('ecValor').value = '';
+    await ecCarregar(); renderEncontro(); $('ecDesc').focus();
+  } catch(err) { $('ecErro').textContent = /Failed to fetch/.test(err.message) ? 'O receptor local não respondeu.' : err.message; }
+  $('ecLancar').disabled = false;
+});
+
+// Edição (lápis)
+function ecEditar(id){
+  const l = EC.dados.lancamentos.find(x => x.id === id); if (!l) return;
+  EC.edit = l; EC.tipoEd = l.tipo;
+  $('edData').value = l.data; $('edDesc').value = l.descricao; $('edLoja').value = l.loja; $('edValor').value = alNum(l.valor); $('edErro').textContent = '';
+  ecSeg('edTipo','tipoEd');
+  const nomes = { data:'data', descricao:'descrição', valor:'valor', tipo:'tipo', loja:'loja' };
+  const fmt = (k,v) => k==='valor' ? brl(v) : k==='tipo' ? (v==='C'?'Crédito':'Débito') : k==='loja' ? (EC_LOJA[v]||v) : k==='data' ? ecData(v) : `"${v}"`;
+  $('edHist').innerHTML = `<div class="ec-hist">Lançado por <b>${esc(l.criadoPor||'–')}</b> em ${nsDataHora(l.criadoEm)}${l.origem&&l.origem!=='manual'?` · ${esc(l.origem)}`:''}.${
+    (l.historico||[]).length ? `<ul>${l.historico.slice().reverse().map(h => `<li><b>${esc(h.por)}</b> em ${nsDataHora(h.em)}: ${Object.entries(h.mudou).map(([k,v]) => `${nomes[k]||k} de ${esc(fmt(k,v.de))} para ${esc(fmt(k,v.para))}`).join('; ')}</li>`).join('')}</ul>` : ''}</div>`;
+  $('ecDlg').showModal(); $('edDesc').focus();
+}
+$('ecDlgForm').addEventListener('submit', async e => {
+  e.preventDefault(); $('edErro').textContent = '';
+  const valor = alValor($('edValor').value);
+  if (!valor || isNaN(valor) || valor <= 0) { $('edErro').textContent = 'Informe um valor maior que zero.'; return; }
+  try {
+    await ecPost('/encontro/lancamento', { id:EC.edit.id, data:$('edData').value, descricao:$('edDesc').value, loja:$('edLoja').value, tipo:EC.tipoEd, valor, usuario:getUser()||'' });
+    $('ecDlg').close(); await ecCarregar(); renderEncontro();
+  } catch(err) { $('edErro').textContent = err.message; }
+});
+$('edCancel').onclick = $('ecDlgX').onclick = () => $('ecDlg').close();
+
+// Envio de planilha
+function ecEscolher(f){
+  $('ecArqErro').textContent = '';
+  if (!f) return;
+  if (!/\.(xlsx?|xlsm|xlsb|csv|ods|pdf)$/i.test(f.name)) { $('ecArqErro').textContent = 'Envie uma planilha .xls, .xlsx ou .csv (ou PDF).'; return; }
+  if (f.size > 20*1024*1024) { $('ecArqErro').textContent = 'Arquivo maior que 20 MB.'; return; }
+  EC.arquivo = f; $('ecArqTxt').textContent = `${f.name} (${Math.max(1,Math.round(f.size/1024))} KB)`; $('ecEnviar').disabled = false;
+}
+$('ecArq').onchange = e => ecEscolher(e.target.files[0]);
+['dragenter','dragover'].forEach(ev => $('ecDrop').addEventListener(ev, e => { e.preventDefault(); $('ecDrop').classList.add('on'); }));
+['dragleave','drop'].forEach(ev => $('ecDrop').addEventListener(ev, e => { e.preventDefault(); $('ecDrop').classList.remove('on'); }));
+$('ecDrop').addEventListener('drop', e => ecEscolher(e.dataTransfer.files[0]));
+$('ecEnviar').onclick = async () => {
+  const f = EC.arquivo; if (!f) return;
+  $('ecEnviar').disabled = true; $('ecArqErro').textContent = '';
+  try {
+    const b64 = await new Promise((ok, falha) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1]); r.onerror = falha; r.readAsDataURL(f); });
+    await ecPost('/encontro/planilha', { nome:f.name, conteudo:b64, obs:$('ecArqObs').value, usuario:getUser()||'' });
+    EC.arquivo = null; $('ecArq').value = ''; $('ecArqObs').value = ''; $('ecArqTxt').textContent = 'Planilha enviada! Clique ou arraste outra aqui';
+    await ecCarregar(); renderEncontro();
+  } catch(err) { $('ecArqErro').textContent = err.message; $('ecEnviar').disabled = false; }
+};
 
 /* ================= INDICADOR DA VPN =================
    Canto inferior direito, só informativo: VPN ON (verde) quando o banco do portal (172.16.16.18) responde
