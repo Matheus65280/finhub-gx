@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-26T12:57:21-03:00";</script>
+<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-26T13:06:11-03:00";</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FinHub GX</title>
@@ -507,6 +507,8 @@ table.ec td.ec-bt button+button{margin-left:6px}
 #ecDelMotivo{width:100%}
 #ecValor,#edValor{text-align:right;font-variant-numeric:tabular-nums}
 .ec-prog{display:flex;flex-direction:column;gap:6px}
+.ec-prog[hidden]{display:none}
+#ecPrevia:not(:empty){margin-top:12px}
 .ec-prog-txt{display:flex;justify-content:space-between;font-size:13px;color:var(--gx-muted)}
 .ec-prog-txt b{color:var(--gx-text);font-variant-numeric:tabular-nums}
 .ec-prog-bar{height:10px;border-radius:999px;background:var(--gx-border);overflow:hidden}
@@ -773,10 +775,10 @@ html.intro .marca{visibility:hidden}
         <div class="ec-rodape"><span class="ec-erro" id="ecArqErro" role="alert"></span><button class="btn" type="button" id="ecEnviar" disabled>Enviar planilha</button></div>
         <div class="ec-prog" id="ecProg" hidden><div class="ec-prog-txt"><span id="ecProgEtapa">Enviando…</span><b id="ecProgPct">0%</b></div>
           <div class="ec-prog-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="ecProgBar"><span id="ecProgFill"></span></div></div>
-        <div id="ecPrevia"></div>
         <div id="ecPlanilhas"></div>
       </div>
     </div>
+    <div id="ecPrevia"></div>
     <h2 class="sec">Extrato</h2>
     <div class="tabfat" id="ecExtrato"></div>
   </section>
