@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-26T12:46:13-03:00";</script>
+<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-26T12:57:21-03:00";</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FinHub GX</title>
@@ -506,6 +506,28 @@ table.ec td.ec-bt button+button{margin-left:6px}
 .ec-del-lbl{display:block;font-size:12.5px;font-weight:600;color:var(--gx-muted);margin-bottom:4px}
 #ecDelMotivo{width:100%}
 #ecValor,#edValor{text-align:right;font-variant-numeric:tabular-nums}
+.ec-prog{display:flex;flex-direction:column;gap:6px}
+.ec-prog-txt{display:flex;justify-content:space-between;font-size:13px;color:var(--gx-muted)}
+.ec-prog-txt b{color:var(--gx-text);font-variant-numeric:tabular-nums}
+.ec-prog-bar{height:10px;border-radius:999px;background:var(--gx-border);overflow:hidden}
+.ec-prog-bar span{display:block;height:100%;width:0;background:var(--gx-primary);border-radius:999px;transition:width .2s ease}
+.ec-prog-bar.ind span{width:35%!important;animation:ecInd 1.1s ease-in-out infinite}
+@keyframes ecInd{0%{transform:translateX(-100%)}100%{transform:translateX(300%)}}
+@media (prefers-reduced-motion:reduce){.ec-prog-bar.ind span{animation:none;width:100%!important;opacity:.6}}
+.ec-prev{border:1px solid var(--gx-border);border-radius:var(--gx-radius-sm);padding:12px;display:flex;flex-direction:column;gap:8px;font-size:13px}
+.ec-prev.ok{border-left:4px solid var(--gx-primary)}
+.ec-prev.dup{border-left:4px solid var(--gx-warning);background:#FFFAEB}
+.ec-prev table{width:100%;border-collapse:collapse}
+.ec-prev td{padding:4px 6px;border-bottom:1px solid var(--gx-border)}
+.ec-prev td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ec-prev tr.t td{font-weight:700;border-bottom:0}
+.ec-prev .ec-rodape{justify-content:flex-end}
+.ec-prev td.ec-igual{color:var(--gx-warning);font-size:12px;font-weight:600}
+.ec-conf-aviso{border:1px solid #FEDF89;background:#FFFAEB;color:var(--gx-text);border-radius:var(--gx-radius-sm);padding:10px 12px;font-size:13px}
+.ec-conf-aviso b:first-child{color:var(--gx-warning)}
+.ec-conf-aviso ul,.ec-del-resumo ul{margin:6px 0 0;padding-left:18px}
+:root[data-theme="dark"] .ec-conf-aviso{background:rgba(180,83,9,.18);border-color:rgba(251,191,36,.45)}
+:root[data-theme="dark"] .ec-prev.dup{background:rgba(180,83,9,.18)}
 .ec-hist{margin-top:14px;font-size:12.5px;color:var(--gx-muted)}
 .ec-hist b{color:var(--gx-text)}
 .ec-hist li{margin-top:4px}
@@ -749,6 +771,9 @@ html.intro .marca{visibility:hidden}
         <label class="drop ec-drop" id="ecDrop"><input type="file" id="ecArq" accept=".xls,.xlsx,.xlsm,.xlsb,.csv,.ods,.pdf" hidden><span id="ecArqTxt">Clique ou arraste a planilha aqui</span></label>
         <input type="text" id="ecArqObs" maxlength="300" placeholder="Observação (opcional): ex. lançamentos de outubro">
         <div class="ec-rodape"><span class="ec-erro" id="ecArqErro" role="alert"></span><button class="btn" type="button" id="ecEnviar" disabled>Enviar planilha</button></div>
+        <div class="ec-prog" id="ecProg" hidden><div class="ec-prog-txt"><span id="ecProgEtapa">Enviando…</span><b id="ecProgPct">0%</b></div>
+          <div class="ec-prog-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="ecProgBar"><span id="ecProgFill"></span></div></div>
+        <div id="ecPrevia"></div>
         <div id="ecPlanilhas"></div>
       </div>
     </div>
@@ -772,6 +797,11 @@ html.intro .marca{visibility:hidden}
     </form>
   </dialog>
 
+  <dialog class="cfg" id="ecConfDlg">
+    <div class="dh"><h2>Os valores estão corretos?</h2><button type="button" id="ecConfX" aria-label="Fechar" onclick="this.closest('dialog').close()">×</button></div>
+    <div class="db"><p class="ec-dica" style="margin-bottom:10px">Confira o que vai entrar no extrato do Encontro de contas 48/49. Posso seguir com o lançamento?</p><div id="ecConfResumo"></div></div>
+    <div class="df"><span class="erro" id="ecConfErro" role="alert"></span><button class="btn" type="button" onclick="this.closest('dialog').close()">Voltar e conferir</button><button class="btn pri2" type="button" id="ecConfOk">Sim, está correto · pode lançar</button></div>
+  </dialog>
   <dialog class="cfg" id="ecDelDlg">
     <form method="dialog" id="ecDelForm">
       <div class="dh"><h2>Excluir lançamento?</h2><button type="button" id="ecDelX" aria-label="Fechar">×</button></div>
@@ -2022,11 +2052,61 @@ function renderEncontro(){
   $('ecExtrato').querySelectorAll('.ec-lapis[data-id]').forEach(b => b.onclick = () => ecEditar(b.dataset.id));
   $('ecExtrato').querySelectorAll('.ec-lixo').forEach(b => b.onclick = () => ecExcluir(b.dataset.del));
   // planilhas enviadas
-  const sit = { aguardando:['aviso','Aguardando leitura'], incluida:['emitida','Lançamentos incluídos'], erro:['erro','Não foi possível ler'] };
+  const sit = { aguardando:['aviso','Aguardando o Claude ler'], lida:['aviso','Lida · falta confirmar'], incluida:['emitida','Lançamentos incluídos'],
+                duplicada:['neutro','Repetida · não lançada'], erro:['erro','Não foi possível ler'] };
   const pl = EC.dados.planilhas.slice().reverse().slice(0,8);
   $('ecPlanilhas').innerHTML = pl.length ? `<ul class="ec-plan">${pl.map(p => `<li><a href="${RECEPTOR}/encontro/planilha/${p.id}" title="Baixar ${esc(p.nome)}">${esc(p.nome)}</a>
-      <span class="st ${sit[p.situacao]?.[0]||'neutro'}">${sit[p.situacao]?.[1]||p.situacao}${p.situacao==='incluida'?` (${p.lancamentosIncluidos})`:''}</span>
-      <span class="q">${esc(p.enviadoPor||'')} · ${nsDataHora(p.enviadoEm)}</span></li>`).join('')}</ul>` : '';
+      ${p.situacao==='incluida' && p.ativos===0 ? `<span class="st neutro">Lançamentos excluídos</span>` :
+        `<span class="st ${sit[p.situacao]?.[0]||'neutro'}">${sit[p.situacao]?.[1]||p.situacao}${p.situacao==='incluida'?` (${p.lancamentosIncluidos})`:''}</span>`}
+      <span class="q">${esc(p.enviadoPor||'')} · ${nsDataHora(p.enviadoEm)}</span>${p.situacao==='lida'?` <button class="btn" type="button" data-prev="${p.id}" style="min-height:30px;padding:4px 10px;font-size:12.5px">Ver e lançar</button>`:''}</li>`).join('')}</ul>` : '';
+  $('ecPlanilhas').querySelectorAll('[data-prev]').forEach(b => b.onclick = () => ecMostrarPrevia(EC.dados.planilhas.find(x => x.id === b.dataset.prev)));
+}
+
+/* Prévia da planilha lida na hora: o usuário confere e confirma o lançamento */
+function ecMostrarPrevia(p){
+  const box = $('ecPrevia');
+  if (!p) { box.innerHTML = ''; return; }
+  if (!p.previa) {
+    box.innerHTML = `<div class="ec-prev"><b>Planilha recebida: ${esc(p.nome)}</b><span>Formato não reconhecido automaticamente${p.nota?` (${esc(p.nota)})`:''}. Ela fica na fila e o Claude lê quando vocês pedirem.</span></div>`;
+    return;
+  }
+  const pv = p.previa, NT = { CD:'Cartão de crédito (CD)', DB:'Cartão de débito (DB)' };
+  const tab = `<table>${pv.itens.map(i => `<tr><td>${NT[i.tipo]}</td><td>${EC_LOJA[i.loja]}</td><td class="n">${i.qtde} lanç.</td><td class="n">${brl(i.valor)}</td></tr>${
+      (i.iguais||[]).length ? `<tr><td colspan="4" class="ec-igual">⚠ Mesmo valor já lançado: ${i.iguais.map(g => `${ecData(g.data)} · ${esc(g.descricao.slice(0,60))}`).join(' | ')}</td></tr>` : ''}`).join('')}
+    <tr class="t"><td colspan="3">Total a lançar como crédito</td><td class="n">${brl(pv.total)}</td></tr></table>`;
+  const extra = `${pv.at ? `<span>Adiantamentos (AT) de ${brl(pv.at)} <b>não</b> entram.</span>` : ''}${pv.foraDoPadrao ? `<span style="color:var(--gx-warning)">Atenção: ${pv.foraDoPadrao} linha(s) fora do padrão não foram somadas.</span>` : ''}`;
+  if (p.situacao === 'duplicada') {
+    box.innerHTML = `<div class="ec-prev dup"><b>⚠ Planilha repetida: ${esc(p.nome)}</b><span>${esc(p.nota||'Arquivo idêntico a uma planilha já lançada')}. Para não duplicar os valores, ela <b>não</b> será lançada.</span>${tab}</div>`;
+    return;
+  }
+  if (p.situacao === 'incluida') { box.innerHTML = ''; return; }
+  box.innerHTML = `<div class="ec-prev ok"><b>✓ Planilha lida: ${esc(pv.modelo)}</b><span>Período ${esc(pv.periodo[0])} a ${esc(pv.periodo[1])} · lançamentos com a data do envio (${ecData(p.enviadoEm.slice(0,10))}).</span>${tab}${extra}
+    <div class="ec-rodape"><span class="ec-erro" id="ecPrevErro"></span><button class="btn" type="button" id="ecPrevNao">Agora não</button><button class="btn pri2" type="button" id="ecPrevOk">Lançar no extrato</button></div></div>`;
+  $('ecPrevNao').onclick = () => { box.innerHTML = ''; };
+  $('ecPrevOk').onclick = () => ecConfirmar(p);
+}
+
+/* Tela de confirmação: "Está correto? Posso seguir?" — com os avisos de valores iguais / período repetido */
+function ecConfirmar(p){
+  const pv = p.previa, avisos = [];
+  if (pv.valoresIguais) avisos.push(`<b>${pv.valoresIguais} valor(es) igual(is)</b> a lançamentos que já estão no extrato (mesma loja e mesmo valor). Pode ser lançamento em dobro.`);
+  (pv.periodoRepetido||[]).forEach(x => avisos.push(`O período <b>${esc(pv.periodo[0])} a ${esc(pv.periodo[1])}</b> se sobrepõe à planilha <b>${esc(x.nome)}</b>, lançada em ${nsDataHora(x.enviadoEm)} (período ${esc(x.periodo[0])} a ${esc(x.periodo[1])}).`));
+  $('ecConfResumo').innerHTML = `<div class="ec-del-resumo"><b>${esc(p.nome)}</b> · período ${esc(pv.periodo[0])} a ${esc(pv.periodo[1])}<br>
+      ${pv.itens.filter(i=>i.valor>0).length} lançamentos de <b>crédito</b> com data ${ecData(p.enviadoEm.slice(0,10))} · total <b>${brl(pv.total)}</b>
+      <ul>${pv.itens.filter(i=>i.valor>0).map(i => `<li>${i.tipo==='CD'?'Cartão de crédito':'Cartão de débito'} · ${EC_LOJA[i.loja]}: <b>${brl(i.valor)}</b></li>`).join('')}</ul></div>
+    ${avisos.length ? `<div class="ec-conf-aviso"><b>⚠ Atenção antes de seguir</b><ul>${avisos.map(a=>`<li>${a}</li>`).join('')}</ul></div>` : `<p class="ec-dica">Nenhum valor igual ou período repetido encontrado no extrato.</p>`}`;
+  $('ecConfOk').textContent = avisos.length ? 'Lançar mesmo assim' : 'Sim, está correto · pode lançar';
+  $('ecConfOk').className = 'btn ' + (avisos.length ? 'ec-btn-excluir' : 'pri2');
+  $('ecConfErro').textContent = '';
+  $('ecConfOk').onclick = async () => {
+    $('ecConfOk').disabled = true;
+    try {
+      await ecPost('/encontro/planilha/confirmar', { id:p.id, usuario:getUser()||'', forcar: avisos.length > 0 });
+      $('ecConfDlg').close(); $('ecPrevia').innerHTML = ''; await ecCarregar(); renderEncontro();
+    } catch(err) { $('ecConfErro').textContent = err.message; }
+    $('ecConfOk').disabled = false;
+  };
+  $('ecConfDlg').showModal();
 }
 
 // Novo lançamento
@@ -2098,15 +2178,36 @@ $('ecArq').onchange = e => ecEscolher(e.target.files[0]);
 ['dragenter','dragover'].forEach(ev => $('ecDrop').addEventListener(ev, e => { e.preventDefault(); $('ecDrop').classList.add('on'); }));
 ['dragleave','drop'].forEach(ev => $('ecDrop').addEventListener(ev, e => { e.preventDefault(); $('ecDrop').classList.remove('on'); }));
 $('ecDrop').addEventListener('drop', e => ecEscolher(e.dataTransfer.files[0]));
+function ecProgresso(pct, etapa, indeterminado){
+  $('ecProg').hidden = false;
+  $('ecProgEtapa').textContent = etapa;
+  $('ecProgPct').textContent = indeterminado ? '' : `${pct}%`;
+  $('ecProgBar').classList.toggle('ind', !!indeterminado);
+  $('ecProgFill').style.width = `${pct}%`;
+  $('ecProgBar').setAttribute('aria-valuenow', String(pct));
+}
 $('ecEnviar').onclick = async () => {
   const f = EC.arquivo; if (!f) return;
-  $('ecEnviar').disabled = true; $('ecArqErro').textContent = '';
+  $('ecEnviar').disabled = true; $('ecArqErro').textContent = ''; $('ecPrevia').innerHTML = '';
   try {
-    const b64 = await new Promise((ok, falha) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1]); r.onerror = falha; r.readAsDataURL(f); });
-    await ecPost('/encontro/planilha', { nome:f.name, conteudo:b64, obs:$('ecArqObs').value, usuario:getUser()||'' });
-    EC.arquivo = null; $('ecArq').value = ''; $('ecArqObs').value = ''; $('ecArqTxt').textContent = 'Planilha enviada! Clique ou arraste outra aqui';
-    await ecCarregar(); renderEncontro();
-  } catch(err) { $('ecArqErro').textContent = err.message; $('ecEnviar').disabled = false; }
+    ecProgresso(2, 'Preparando o arquivo…');
+    const b64 = await new Promise((ok, falha) => { const r = new FileReader(); r.onprogress = e => { if (e.lengthComputable) ecProgresso(Math.round(e.loaded/e.total*15), 'Preparando o arquivo…'); }; r.onload = () => ok(String(r.result).split(',')[1]); r.onerror = falha; r.readAsDataURL(f); });
+    const corpo = JSON.stringify({ nome:f.name, conteudo:b64, obs:$('ecArqObs').value, usuario:getUser()||'' });
+    const p = await new Promise((ok, falha) => {
+      const x = new XMLHttpRequest();
+      x.open('POST', RECEPTOR + '/encontro/planilha');
+      x.setRequestHeader('Content-Type', 'application/json');
+      x.upload.onprogress = e => { if (e.lengthComputable) ecProgresso(15 + Math.round(e.loaded/e.total*70), 'Enviando a planilha…'); };
+      x.upload.onload = () => ecProgresso(90, 'Lendo a planilha…', true);
+      x.onload = () => x.status === 200 ? ok(JSON.parse(x.responseText)) : falha(new Error(x.responseText || `erro ${x.status}`));
+      x.onerror = () => falha(new Error('O receptor local não respondeu.'));
+      x.send(corpo);
+    });
+    ecProgresso(100, p.previa ? (p.situacao==='duplicada' ? 'Lida: planilha repetida' : 'Planilha lida! Confira abaixo e confirme.') : 'Planilha recebida');
+    EC.arquivo = null; $('ecArq').value = ''; $('ecArqObs').value = ''; $('ecArqTxt').textContent = 'Clique ou arraste outra planilha aqui';
+    await ecCarregar(); renderEncontro(); ecMostrarPrevia(EC.dados.planilhas.find(x => x.id === p.id) || p);
+    setTimeout(() => { $('ecProg').hidden = true; }, 2500);
+  } catch(err) { $('ecProg').hidden = true; $('ecArqErro').textContent = err.message; $('ecEnviar').disabled = false; }
 };
 
 /* ================= INDICADOR DA VPN =================
