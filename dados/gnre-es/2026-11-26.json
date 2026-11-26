@@ -11,9 +11,12 @@
    "valor": 79.3,
    "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
    "infoAdicional": "NF 4270",
-   "status": "pendente",
+   "status": "emitida",
    "municipio": "VITORIA",
-   "cMun": "3205309"
+   "cMun": "3205309",
+   "dua": "4036986489",
+   "pdf": "dados/gnre-es/pdf/2026-11-26/DUA_4036986489_AFEET203_NF4270.pdf",
+   "emitidaEm": "2026-11-26T01:37:48"
   },
   {
    "nf": "1094",
@@ -25,12 +28,15 @@
    "valor": 18.2,
    "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
    "infoAdicional": "NF 1094",
-   "status": "pendente",
+   "status": "emitida",
    "municipio": "VITORIA",
-   "cMun": "3205309"
+   "cMun": "3205309",
+   "dua": "4036986503",
+   "pdf": "dados/gnre-es/pdf/2026-11-26/DUA_4036986503_AWK89_NF1094.pdf",
+   "emitidaEm": "2026-11-26T01:39:09"
   }
  ],
  "planilha": "C:\\Users\\GX\\Desktop\\GNRE Diaria\\2026\\11-2026\\26-11\\planilha_contas_a_pagar_gnre_26-11.xls",
- "lidoEm": "2026-11-26T01:36:03",
- "atualizadoEm": "2026-11-26T01:36:03"
+ "lidoEm": "2026-11-26T01:39:10",
+ "atualizadoEm": "2026-11-26T01:39:10"
 }
