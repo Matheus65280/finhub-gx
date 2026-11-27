@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-27T09:26:14-03:00";</script>
+<script>window.FINHUB_ONLINE=true;window.FINHUB_PUBLICADO="2026-11-27T09:36:13-03:00";</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FinHub GX</title>
@@ -397,6 +397,14 @@ dialog.cfg .dh button{color:var(--gx-muted)}
 .st.erro{color:var(--gx-danger);background:#FEF3F2;border-color:#FECDCA}
 .st.aviso{color:var(--gx-warning);background:#FFFAEB;border-color:#FEDF89}
 .kpi .v.up{color:var(--gx-success)}.kpi .v.down{color:var(--gx-danger)}
+/* Faturamento: separação por empresa (Xambre Comércio · Xambre MG · Macca) */
+.kpis.emps:empty{display:none}
+.kpi.emp{font:inherit;text-align:left;cursor:pointer;color:var(--gx-text);transition:border-color .2s,box-shadow .2s}
+.kpi.emp:hover{border-color:var(--gx-primary)}
+.kpi.emp:focus-visible{outline:2px solid var(--gx-primary);outline-offset:2px}
+.store .emp{font-size:12px;font-weight:600;color:var(--gx-primary-text);margin:2px 0 4px;line-height:1.3}
+:root[data-theme="dark"] .store .emp{color:var(--gx-primary)}
+@media (max-width:767px){.seg-emp{display:flex;flex-wrap:wrap}.seg-emp button{flex:1 1 auto}}
 .cf-card.ok{border-color:var(--gx-success);background:#ECFDF3}.cf-card.ok .cf-st{color:var(--gx-success)}
 .cf-card.sem{border-color:#F79009;background:#FFFAEB}.cf-card.sem .cf-st{color:var(--gx-warning)}
 .cf-card.nao{border-color:var(--gx-danger);background:#FEF3F2}.cf-card.nao .cf-st{color:var(--gx-danger)}
@@ -630,11 +638,13 @@ html.intro .marca{visibility:hidden}
     <p class="sub">Faturamento diário por loja, Authentic Feet e Artwalk, conforme o relatório de faturamento do UPDi.</p>
     <div class="barra">
       <div><label>Marca</label><div class="seg" id="fMarca"></div></div>
+      <div><label>Empresa</label><div class="seg seg-emp" id="fEmp"></div></div>
       <div><label>Mês</label><select id="fMes"></select></div>
       <div><label>Origem</label><div class="seg" id="fOrig"></div></div>
       <div class="atual" id="fAtual"></div>
     </div>
     <div class="kpis" id="fKpis"></div>
+    <div class="kpis emps" id="fEmpresas"></div>
     <h2 class="sec">Por loja <small>clique numa loja para ver o detalhamento</small></h2>
     <div id="fLojas"></div>
     <h2 class="sec">Faturamento dia a dia</h2>
@@ -948,7 +958,30 @@ const MARCAS = { AFEET:'Authentic Feet', AWALK:'Artwalk' };
 const MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 const MES3 = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
 const SEM = ['DOM','SEG','TER','QUA','QUI','SEX','SÁB'];
-const FAT = { dados:null, marca:'TODAS', per:null, orig:'T', loja:null, coletado:null };
+const FAT = { dados:null, marca:'TODAS', emp:'TODAS', per:null, orig:'T', loja:null, coletado:null };
+
+/* Empresa (CNPJ) de cada loja, com as viradas de chave informadas pelo financeiro (27/11/2026).
+   Padrão: Xambre Comércio. Xambre MG até o dia anterior à virada; AWALK 75 fechou como Xambre MG. */
+const EMPRESAS = { XC:'Xambre Comércio', XMG:'Xambre MG', MACCA:'Macca' };
+const EMP_MACCA = { AFEET:[8,27,43,93,126,163], AWALK:[3,16,25,36,53,69] };
+const EMP_MG = { 'AFEET-169':'2026-06-01', 'AWALK-89':'2026-07-31', 'AWALK-64':'2026-10-30', 'AWALK-75':'9999-12-31' }; // data em que virou Xambre Comércio
+function empresaDe(marca, cod, ano, mes, dia){
+  const n = parseInt(cod,10);
+  if ((EMP_MACCA[marca]||[]).includes(n)) return 'MACCA';
+  const virada = EMP_MG[`${marca}-${n}`];
+  if (virada && `${ano}-${dd(mes)}-${dd(dia)}` < virada) return 'XMG';
+  return 'XC';
+}
+function empresasNoMes(l, ano, mes){
+  const s = new Set(); for (let d=1; d<=diasNoMes(ano,mes); d++) s.add(empresaDe(l.marca, l.cod, ano, mes, d));
+  return [...s];
+}
+function empresaTxt(l, ano, mes){
+  const e = empresasNoMes(l, ano, mes);
+  if (e.length===1) return EMPRESAS[e[0]];
+  const v = EMP_MG[`${l.marca}-${parseInt(l.cod,10)}`], [, , dv] = v.split('-');
+  return `Xambre MG até ${dd(+dv-1)}/${dd(mes)} · Xambre Comércio a partir de ${dv}/${dd(mes)}`;
+}
 const brl = c => (c/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const pct = (a,b) => b ? Math.round(a/b*100) : 0;
 const dd = n => String(n).padStart(2,'0');
@@ -1013,6 +1046,7 @@ function montarFiltros(){
     $(el).querySelectorAll('button').forEach(b=>b.onclick=()=>{ FAT[key]=b.dataset.v; (key==='orig'?['fOrig','lOrig']:[el]).forEach(x=>seg(x,opts,key)); renderAtual(); });
   };
   seg('fMarca', [['TODAS','Todas'], ...Object.keys(FAT.dados).map(k=>[k,MARCAS[k]])], 'marca');
+  seg('fEmp', [['TODAS','Todas'], ...Object.entries(EMPRESAS)], 'emp');
   const o = [['T','Total'],['F','Física'],['D','Digital']];
   seg('fOrig', o, 'orig'); seg('lOrig', o, 'orig');
   const txt = FAT.coletado ? `Dados do UPDi coletados em<br><b>${new Date(FAT.coletado).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})}</b>` : '';
@@ -1038,42 +1072,52 @@ function renderFaturamento(){
   const dias = [...Array(nd)].map((_,i)=>i+1);
   const totDia = dias.map(()=>0); let totF=0, totD=0, nLojas=0; const cards = [];
   const cel = (v, d) => ehFuturo(ano,mes,d) ? '<td class="fut">–</td>' : `<td class="${v===0?'zero':''}">${brl(v)}</td>`;
-  const linhas = [];
+  const linhas = [], empTot = { XC:0, XMG:0, MACCA:0 };
+  const marcasCom = [];
   marcas.forEach(k=>{
-    const sub = dias.map(()=>0);
-    linhas.push(`<tr class="grupo"><td class="loja">${MARCAS[k]}</td><td colspan="${nd+1}"></td></tr>`);
+    const sub = dias.map(()=>0), meu = [];
     FAT.dados[k][ano].lojas.forEach(l=>{
+      const ok = d => FAT.emp==='TODAS' || empresaDe(k, l.cod, ano, mes, d)===FAT.emp;
+      if (!dias.some(ok)) return;   // loja não pertence à empresa escolhida neste mês
       nLojas++;
       const arr = l.meses[mes] || [];
-      const vals = dias.map(d=>{ const p=arr[d-1]; if(p){ totF+=p[1]; totD+=p[2]; } return valorOrig(p); });
+      let lf = 0, lg = 0;
+      const vals = dias.map(d=>{ const p=arr[d-1]; if (!ok(d)) return 0;
+        if(p){ lf+=p[1]; lg+=p[2]; empTot[empresaDe(k, l.cod, ano, mes, d)] += valorOrig(p); } return valorOrig(p); });
+      totF+=lf; totD+=lg;
       vals.forEach((v,i)=>{ sub[i]+=v; totDia[i]+=v; });
       const tot = vals.reduce((a,b)=>a+b,0);
-      linhas.push(`<tr><td class="loja" title="${l.rot} · ${esc(l.nome)}"><span class="cod">${l.rot}</span>${esc(l.nome)}</td>${vals.map((v,i)=>cel(v,dias[i])).join('')}<td class="tot">${brl(tot)}</td></tr>`);
-      const lf = arr.reduce((a,p)=>a+p[1],0), lg = arr.reduce((a,p)=>a+p[2],0);
-      cards.push({ l, marca:k, tot, f:lf, g:lg });
+      if (FAT.emp!=='TODAS' && !tot) { nLojas--; return; }   // filtro por empresa: esconde loja sem venda (ex.: fechada)
+      const emp = empresaTxt(l, ano, mes);
+      meu.push(`<tr><td class="loja" title="${l.rot} · ${esc(l.nome)} · ${emp}"><span class="cod">${l.rot}</span>${esc(l.nome)}</td>${vals.map((v,i)=>ok(dias[i])?cel(v,dias[i]):'<td class="fut">–</td>').join('')}<td class="tot">${brl(tot)}</td></tr>`);
+      cards.push({ l, marca:k, tot, f:lf, g:lg, emp });
     });
+    if (!meu.length) return;
+    marcasCom.push(k);
+    linhas.push(`<tr class="grupo"><td class="loja">${MARCAS[k]}</td><td colspan="${nd+1}"></td></tr>`, ...meu);
     const st = sub.reduce((a,b)=>a+b,0);
     linhas.push(`<tr class="sub"><td class="loja">Total ${MARCAS[k]}</td>${sub.map((v,i)=>cel(v,dias[i])).join('')}<td class="tot">${brl(st)}</td></tr>`);
   });
   const geral = totDia.reduce((a,b)=>a+b,0);
-  if (marcas.length>1) linhas.push(`<tr class="geral"><td class="loja">TOTAL GERAL</td>${totDia.map((v,i)=>cel(v,dias[i])).join('')}<td class="tot">${brl(geral)}</td></tr>`);
+  if (marcasCom.length>1) linhas.push(`<tr class="geral"><td class="loja">TOTAL GERAL</td>${totDia.map((v,i)=>cel(v,dias[i])).join('')}<td class="tot">${brl(geral)}</td></tr>`);
   const head = `<tr><th class="loja">Loja</th>${dias.map(d=>{ const w=new Date(ano,mes-1,d).getDay(); return `<th class="${w===0||w===6?'fds':''}">${dd(d)}/${dd(mes)}<small>${SEM[w]}</small></th>`; }).join('')}<th class="tot">Total do mês</th></tr>`;
-  $('fTabela').innerHTML = marcas.length ? `<table><thead>${head}</thead><tbody>${linhas.join('')}</tbody></table>` : '<div class="vazio">Sem dados para esta marca neste mês.</div>';
+  $('fTabela').innerHTML = marcasCom.length ? `<table><thead>${head}</thead><tbody>${linhas.join('')}</tbody></table>` : `<div class="vazio">Sem lojas ${FAT.emp==='TODAS'?'desta marca':'da '+EMPRESAS[FAT.emp]+(FAT.marca==='TODAS'?'':' nesta marca')} neste mês.</div>`;
 
   // Por loja (cards no estilo do Docas)
   const maxLoja = Math.max(1, ...cards.map(c=>c.tot));
-  $('fLojas').innerHTML = cards.length ? marcas.map(k=>{
+  $('fLojas').innerHTML = cards.length ? marcasCom.map(k=>{
     const cs = cards.filter(c=>c.marca===k);
     return `<div class="redetit"><span class="rede ${k}">${k==='AFEET'?'AF':'AW'}</span>${MARCAS[k]} <span>${cs.length} lojas</span></div>
     <div class="stores">${cs.map(c=>`
       <button class="store" type="button" data-loja="${c.l.id}" title="Ver detalhamento da loja ${c.l.rot}">
         <b>${c.l.rot}<span class="ir">›</span></b>
         <span class="r">${esc(c.l.nome)}</span>
+        <span class="emp">${c.emp}</span>
         <span class="vl">${brl(c.tot)}</span>
         <div class="bar" title="Física ${pct(c.f,c.f+c.g)}% · Digital ${pct(c.g,c.f+c.g)}%"><span style="width:${(c.f+c.g)?c.f/(c.f+c.g)*100:0}%;background:var(--brand)"></span><span style="width:${(c.f+c.g)?c.g/(c.f+c.g)*100:0}%;background:var(--ink)"></span></div>
         <span class="c"><i class="dot" style="background:var(--brand)"></i>Física ${pct(c.f,c.f+c.g)}% · <i class="dot" style="background:var(--ink)"></i>Digital ${pct(c.g,c.f+c.g)}%</span>
         <div class="peso"><span style="width:${c.tot/maxLoja*100}%"></span></div>
-        <span class="c">${pct(c.tot,geral)}% do faturamento ${marcas.length>1?'total':'da rede'}</span>
+        <span class="c">${pct(c.tot,geral)}% do faturamento ${marcasCom.length>1?'total':'da rede'}</span>
       </button>`).join('')}</div>`; }).join('') : '';
   $('fLojas').querySelectorAll('.store').forEach(b=>b.onclick=()=>abrirLoja(b.dataset.loja));
 
@@ -1081,8 +1125,12 @@ function renderFaturamento(){
   const melhor = diasCom.reduce((a,b)=>!a||b.v>a.v?b:a,null);
   $('fKpis').innerHTML = kpisHTML({
     titulo:`Faturamento de ${MESES[mes-1].toLowerCase()}${origTxt()}`, total:geral,
-    sub:`${nLojas} lojas · ${FAT.marca==='TODAS'?'Authentic Feet + Artwalk':MARCAS[FAT.marca]}`,
+    sub:`${nLojas} lojas · ${FAT.marca==='TODAS'?'Authentic Feet + Artwalk':MARCAS[FAT.marca]}${FAT.emp==='TODAS'?'':' · '+EMPRESAS[FAT.emp]}`,
     totF, totD, melhor, mes, ano, diasCom:diasCom.length });
+  // Separação por empresa (só com "Todas"): cada uma com o valor e a parte do total
+  $('fEmpresas').innerHTML = FAT.emp==='TODAS' && geral ? Object.entries(EMPRESAS).map(([k,n])=>
+    `<button type="button" class="kpi emp" data-emp="${k}" title="Filtrar ${n}"><div class="l">${n}</div><div class="v">${brl(empTot[k])}</div><div class="s">${pct(empTot[k],geral)}% do total</div></button>`).join('') : '';
+  $('fEmpresas').querySelectorAll('[data-emp]').forEach(b=>b.onclick=()=>{ FAT.emp=b.dataset.emp; montarFiltros(); renderFaturamento(); });
 }
 
 function kpisHTML({titulo,total,sub,totF,totD,melhor,mes,ano,diasCom,extra=''}){
@@ -1112,7 +1160,7 @@ function renderLoja(){
     $('lTabela').innerHTML = `<div class="vazio">Esta loja não tem dados em ${ano}.</div>`; return;
   }
   $('lTitulo').textContent = l.nome;
-  $('lSub').innerHTML = `<span class="tagm">${l.rot}</span> ${MARCAS[marca]} · ${MESES[mes-1]} de ${ano}${origTxt()}`;
+  $('lSub').innerHTML = `<span class="tagm">${l.rot}</span> ${MARCAS[marca]} · ${empresaTxt(l, ano, mes)} · ${MESES[mes-1]} de ${ano}${origTxt()}`;
 
   const nd = diasNoMes(ano, mes), arr = l.meses[mes] || [];
   const linhas = [...Array(nd)].map((_,i)=>{ const p = arr[i] || [i+1,0,0]; return { d:i+1, f:p[1], g:p[2], v:valorOrig(p), fut:ehFuturo(ano,mes,i+1) }; });
