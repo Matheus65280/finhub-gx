@@ -1,0 +1,36 @@
+{
+ "data": "2026-11-27",
+ "guias": [
+  {
+   "nf": "22376",
+   "cnpj": "10.319.758/0001-40",
+   "loja": "AFEET 09",
+   "emissao": "2026-11-26",
+   "vencimento": "2026-11-27",
+   "referencia": "11/2026",
+   "valor": 24.7,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 22376",
+   "status": "pendente",
+   "municipio": "VITORIA",
+   "cMun": "3205309"
+  },
+  {
+   "nf": "12288",
+   "cnpj": "10.319.758/0017-08",
+   "loja": "AFEET 106",
+   "emissao": "2026-11-26",
+   "vencimento": "2026-11-27",
+   "referencia": "11/2026",
+   "valor": 53.3,
+   "servico": "ICMS - Substituição Tributária - Contribuintes sediados fora do ES (1376)",
+   "infoAdicional": "NF 12288",
+   "status": "pendente",
+   "municipio": "VITORIA",
+   "cMun": "3205309"
+  }
+ ],
+ "planilha": "C:\\Users\\GX\\Desktop\\GNRE Diaria\\2026\\11-2026\\27-11\\planilha_contas_a_pagar_gnre_27-11.xls",
+ "lidoEm": "2026-11-27T01:35:21",
+ "atualizadoEm": "2026-11-27T01:35:21"
+}
