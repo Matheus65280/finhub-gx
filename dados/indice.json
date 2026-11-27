@@ -1,6 +1,12 @@
 [
  {
   "marca": "AFEET",
+  "ano": 2025,
+  "arquivo": "faturamento-AFEET-2025.json",
+  "coletado": "2026-11-27T11:55:36.453Z"
+ },
+ {
+  "marca": "AFEET",
   "ano": 2026,
   "arquivo": "faturamento-AFEET-2026.json",
   "coletado": "2026-11-27T05:01:15.372Z"
